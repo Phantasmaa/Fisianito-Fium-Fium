@@ -1,3 +1,0 @@
-/home/german/CLionProjects/Fisianito-Fium-Fium/cmake-build-debug/CMakeFiles/Fisianito_Fium_Fium.dir
-/home/german/CLionProjects/Fisianito-Fium-Fium/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/german/CLionProjects/Fisianito-Fium-Fium/cmake-build-debug/CMakeFiles/rebuild_cache.dir
