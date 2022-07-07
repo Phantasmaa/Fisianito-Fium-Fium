@@ -13,13 +13,14 @@ Player::~Player(){
 //Private functions
 void Player::initVariables(){
     this->moveSpeed = 10.f;
-    this->groundHeight = 500;
+    this->groundHeight = 700;
+    this->roofHeight = 300;
     this->gravitySpeed = 10.f;
     this->isJumping = false;
 }
 
 void Player::initShape(){
-    this->shape.setPosition(20,500);
+    this->shape.setPosition(20,this->groundHeight);
     this->shape.setFillColor(sf::Color::Green);
     this->shape.setSize(sf::Vector2f(50.f,50.f));
 }
@@ -33,11 +34,15 @@ void Player::gravity(){
     if(this->getY() < this->groundHeight && this->isJumping == false){
         this->shape.move(0.f,this->gravitySpeed);
     }
+
+    if(this->getY() > this->roofHeight){
+        
+    }
 }
 
 void Player::updateInput(){
     //Keyboard inputs
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
         this->shape.move(0.f, -this->moveSpeed);
         isJumping = true;
     }

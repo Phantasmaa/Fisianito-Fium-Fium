@@ -14,6 +14,7 @@ class Player {
     public:
         //Gravity Variables
         int groundHeight;
+        int roofHeight;
         float gravitySpeed;
         bool isJumping;
 

@@ -13,8 +13,8 @@ Game::~Game(){
 //Private Functions
 void Game::initVariables(){
     this->window = nullptr;
-    this->videoMode.width = 800;
-    this->videoMode.height = 600;
+    this->videoMode.width = 1600;
+    this->videoMode.height = 800;
 }
 
 void Game::initWindow(){
@@ -46,7 +46,6 @@ void Game::pollEvents(){
                 break;
         }
     }
-    
 }
 
 void Game::update(){
