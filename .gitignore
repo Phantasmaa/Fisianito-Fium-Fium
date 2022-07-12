@@ -3,3 +3,4 @@ CMakeLists.txt
 bin/
 cmake-build-debug/
 .idea/
+Makefile
