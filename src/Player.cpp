@@ -14,9 +14,9 @@ Player::~Player(){
 //Private functions
 void Player::initVariables(){
     //Gravity
-    this->groundHeight = 700;
+    this->groundHeight = 650;
     this->roofHeight = 300;
-    this->gravitySpeed = 10.f;
+    this->gravitySpeed = 0.98f;
     this->isJumping = false;
     //Animation
     this->moveSpeed = 50.f;
@@ -27,8 +27,9 @@ void Player::initVariables(){
 void Player::initShape(){
     this->body.setOrigin(body.getSize()/2.0f);
     this->body.setPosition(20,this->groundHeight);
-    this->body.setSize(sf::Vector2f(100.f,100.f));
-    this->body.setTexture(&texture.playerTexture);
+    this->body.setSize(sf::Vector2f(30.f,30.f));
+    //this->body.setTexture(&texture.playerTexture);
+    this->body.setFillColor(sf::Color::Green);
 }
 
 void Player::initObjects(){
