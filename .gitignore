@@ -1,5 +1,4 @@
 .vscode/
-CMakeLists.txt
 bin/
 build/
 cmake-build-debug/
