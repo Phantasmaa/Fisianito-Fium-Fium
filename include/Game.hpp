@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Entity.hpp"
 #include "Player.hpp"
 
 /*Game engine class*/
@@ -14,9 +14,12 @@ class Game {
 
         //Game objects
         Player player;
+        Entity platform;
+        Entity platform_2;
 
         //Private functions
         void initVariables();
+        void initEntitys();
         void initWindow();
     public:
         //Constructor-Destructor

@@ -1,31 +1,31 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "Entity.hpp"
 
-class Player {
+class Player : public Entity {
+
+    // Constructor - Destructor
+    public:
+        Player();
+        virtual ~Player();
+    // Atributos
     private:
-        //Variables
-        sf::RectangleShape shape;
         float moveSpeed;
-        //Private functions
-        void initVariables();
-        void initShape();
-        
     public:
         //Gravity Variables
         int groundHeight;
         int roofHeight;
         float gravitySpeed;
         bool isJumping;
+        bool isOnPlatform;
 
-        //Constructor-Destructor
-        Player();
-        virtual ~Player();
-
-        //Functions
-        int getY();
+    // Metodos
+    private:
+        void initVariables();
+    public:
         void gravity();
         void updateInput();
-        void update(sf::RenderTarget* target);
-        void render(sf::RenderTarget* target);
+        void update(Entity platform);
+        void checkIfIsOnPlatform(Entity platform);
 };

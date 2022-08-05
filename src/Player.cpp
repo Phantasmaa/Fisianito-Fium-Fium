@@ -1,66 +1,90 @@
 #include "Player.hpp"
-
-//Constructor-Destructor
-Player::Player(){
-    this->initVariables();
-    this->initShape();
+#include <iostream>
+// Constructor-Destructor
+Player::Player()
+{
+    initVariables();
+    initShape();
 }
 
-Player::~Player(){
-
+Player::~Player()
+{
 }
 
-//Private functions
-void Player::initVariables(){
-    this->moveSpeed = 10.f;
-    this->groundHeight = 700;
-    this->roofHeight = 300;
-    this->gravitySpeed = 10.f;
-    this->isJumping = false;
+// Private functions
+void Player::initVariables()
+{
+    // Position
+    groundHeight = 300;
+    roofHeight = 300;
+    posX = 20;
+    posY = groundHeight;
+    // Dimensions
+    width = 50.0;
+    height = 50.0;
+    // Speed
+    moveSpeed = 10.f;
+    gravitySpeed = 10.f;
+    // Status
+    isJumping = false;
+    isOnPlatform = false;
 }
 
-void Player::initShape(){
-    this->shape.setPosition(20,this->groundHeight);
-    this->shape.setFillColor(sf::Color::Green);
-    this->shape.setSize(sf::Vector2f(50.f,50.f));
-}
-
-//Functions
-int Player::getY(){
-    return shape.getPosition().y;
-}
-
-void Player::gravity(){
-    if(this->getY() < this->groundHeight && this->isJumping == false){
-        this->shape.move(0.f,this->gravitySpeed);
+// Functions
+void Player::gravity()
+{
+    if (getYCord() < groundHeight && !isJumping && !isOnPlatform)
+    {
+        moveEntity(0.f, gravitySpeed);
     }
-
-    if(this->getY() > this->roofHeight){
-        
+    if (getYCord() > roofHeight)
+    {
     }
+    updateCords();
 }
 
-void Player::updateInput(){
-    //Keyboard inputs
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-        this->shape.move(0.f, -this->moveSpeed);
+void Player::updateInput()
+{
+    // Keyboard inputs
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        moveEntity(0.f, -moveSpeed);
         isJumping = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
-        this->shape.move(-this->moveSpeed, 0.f);
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        moveEntity(-moveSpeed, 0.f);
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
-        this->shape.move(this->moveSpeed, 0.f);
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
+        moveEntity(moveSpeed, 0.f);
     }
+    updateCords();
 }
-void Player::update(sf::RenderTarget* target){
-    //Windows collision
-
-    this->gravity();
-    this->updateInput();
-
+void Player::update(Entity platform)
+{
+    // Windows collision
+    //checkIfIsOnPlatform(platform);
+    gravity();
+    updateInput();
 }
 
-void Player::render(sf::RenderTarget* target){
-    target->draw(this->shape);
+void Player::checkIfIsOnPlatform(Entity platform)
+{
+    /*
+    Si la coordenada Y de player es platform.y - 50
+    y la coordenada X de player está entre platform.X y platform.X + platform.width 
+    entonces player está sobre platform
+    */
+    
+    int minusLimitOnX = platform.getXCord() - width;
+    int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
+    int limitOnY = platform.getYCord() - this->height;
+    if (posX > minusLimitOnX && posX < superiorLimitOnX && posY == limitOnY){
+        std::cout<<"Is on platform"<<std::endl;
+        isOnPlatform = true;
+    } else {
+            isOnPlatform = false;
+    }
+    
 }

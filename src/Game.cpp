@@ -2,60 +2,77 @@
 
 //Constructor-Destructor
 Game::Game(){
-    this->initVariables();
-    this->initWindow();
+    initVariables();
+    initEntitys();
+    initWindow();
 }
 
 Game::~Game(){
-    delete this->window;
+    delete window;
 }
 
 //Private Functions
 void Game::initVariables(){
-    this->window = nullptr;
-    this->videoMode.width = 1600;
-    this->videoMode.height = 800;
+    window = nullptr;
+    videoMode.width = 640;
+    videoMode.height = 480;
+    platform.initAttributes(100, 200, 200.0, 50.0);    
+    platform_2.initAttributes(350, 200, 200.0, 50.0);    
+
 }
 
+
+void Game::initEntitys(){
+    player.initShape();
+    platform.initShape();
+    platform_2.initShape();
+
+}
+
+
 void Game::initWindow(){
-    this->window = new sf::RenderWindow(this->videoMode, "GAME TESTING", sf::Style::Titlebar | sf::Style::Close);
-    this->window->setKeyRepeatEnabled(true);
-    this->window->setFramerateLimit(60);
+    window = new sf::RenderWindow(videoMode, "GAME TESTING", sf::Style::Titlebar | sf::Style::Close);
+    window->setKeyRepeatEnabled(true);
+    window->setFramerateLimit(60);
 }
 
 //Access
 const bool Game::running() const{
-    return this->window->isOpen();
+    return window->isOpen();
 }
 
 //Functions
 void Game::pollEvents(){
-    while (this->window->pollEvent(this->ev)){
-        switch (this->ev.type){
+    while (window->pollEvent(ev)){
+        switch (ev.type){
             case sf::Event::Closed:
-                this->window->close();
+                window->close();
                 break;
 
             case sf::Event::KeyPressed:
-                if (this->ev.key.code == sf::Keyboard::Escape)
-                    this->window->close();
+                if (ev.key.code == sf::Keyboard::Escape)
+                    window->close();
                 break;
 
             case sf::Event::KeyReleased:
-                this->player.isJumping = false;
+                player.isJumping = false;
                 break;
         }
     }
 }
 
 void Game::update(){
-    this->pollEvents();
-    this->player.update(this->window);
+    pollEvents();
+    player.checkIfIsOnPlatform(platform);
+    player.update(platform);
 }
 
 void Game::render(){
-    this->window->clear();
+    window->clear();
     //Draw game objects 
-    this->player.render(this->window);
-    this->window->display();
+    player.renderOnGame(window);
+    platform.renderOnGame(window);
+    platform_2.renderOnGame(window);
+
+    window->display();
 }
