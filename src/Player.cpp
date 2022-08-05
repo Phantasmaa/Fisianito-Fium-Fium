@@ -4,7 +4,6 @@
 Player::Player()
 {
     this->initVariables();
-    // this->initShape();
     this->shape.setOrigin(shape.getSize() / 2.0f);
     this->initObjects();
 }
@@ -19,11 +18,8 @@ void Player::initVariables()
     // Position
     groundHeight = 600;
     roofHeight = 300;
-    posX = 20;
-    posY = groundHeight;
     // Dimensions
-    width = 50.0;
-    height = 50.0;
+    this->initAttributes(20, groundHeight, 50.f, 50.f);
     // Speed
     moveSpeed = 80.f;
     gravitySpeed = 0.98f;
@@ -32,15 +28,6 @@ void Player::initVariables()
     isOnPlatform = false;
 }
 
-/*
-void Player::initShape()
-{
-    this->shape.setPosition(20, this->groundHeight);
-    this->shape.setSize(sf::Vector2f(30.f, 30.f));
-    // this->shape.setTexture(&texture.playerTexture);
-    this->shape.setFillColor(sf::Color::Green);
-}
-*/
 void Player::initObjects()
 {
     this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
