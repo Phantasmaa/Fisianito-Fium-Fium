@@ -5,40 +5,42 @@
 
 /*Game engine class*/
 
-class Game {
-    private:
-        //Variables
-        //Window
-        sf::RenderWindow* window;
-        sf::VideoMode videoMode;
-        sf::Event ev;
-        //View
-        sf::View view;
-        //Time
-        float deltaTime;
-        sf::Clock clock;
+class Game
+{
+private:
+    // Variables
+    // Window
+    sf::RenderWindow *window;
+    sf::VideoMode videoMode;
+    sf::Event ev;
+    // View
+    sf::View view;
+    // Time
+    float deltaTime;
+    sf::Clock clock;
 
-        //Game objects
-        Player player;
-        Platform* platform1;
-        Platform* platform2;
-        Collision c = player.getCollision();
+    // Game objects
+    Player player;
+    Platform platform1;
+    Platform platform2;
+    Collision c = player.getCollision();
 
-        //Private functions
-        void initVariables();
-        void initWindow();
-        void initObjects();
-    public:
-        //Constructor-Destructor
-        Game();
-        virtual ~Game();
+    // Private functions
+    void initVariables();
+    void initWindow();
+    void initEntitys();
+    void initObjects();
 
-        //Access
-        const bool running() const;
+public:
+    // Constructor-Destructor
+    Game();
+    virtual ~Game();
 
-        //Functions
-        void pollEvents();
-        void update();
-        void render();
+    // Access
+    const bool running() const;
 
+    // Functions
+    void pollEvents();
+    void update();
+    void render();
 };

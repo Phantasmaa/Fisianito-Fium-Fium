@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class GameTextures {
-    public:
-        GameTextures();
-        sf::Texture playerTexture;
+class GameTextures
+{
+public:
+    GameTextures();
+    sf::Texture playerTexture;
 };

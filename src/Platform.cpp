@@ -1,31 +1,29 @@
 #include "Platform.hpp"
 
-Platform::Platform(float posX, float posY){
-    this->initVariables();
+Platform::Platform()
+{
     this->initShape();
-    this->shape.setPosition(posX,posY);
+    this->shape.setOrigin(sf::Vector2f(500.0f, 50.0f) / 2.0f);
+    this->shape.setPosition(posX, posY);
 }
 
-Platform::~Platform(){
-
+Platform::~Platform()
+{
 }
 
-void Platform::initVariables(){
-    this->size = sf::Vector2f(400.0f, 50.0f);
+void Platform::initVariables()
+{
 }
 
-void Platform::initShape(){
+/*
+void Platform::initShape()
+{
     this->shape.setSize(size);
-    this->shape.setOrigin(size/2.0f);
+    this->shape.setOrigin(size / 2.0f);
     this->shape.setFillColor(sf::Color::White);
 }
-
-
-void Platform::update(){
-    //Windows collision
-
-}
-
-void Platform::render(sf::RenderTarget* target){
-    target->draw(this->shape);
+*/
+void Platform::update()
+{
+    // Windows collision
 }

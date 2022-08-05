@@ -1,19 +1,20 @@
 #include <iostream>
 #include "Game.hpp"
 
-int main() {
-   //Init Game
-   Game game;
+int main()
+{
+    // Init Game
+    Game game;
 
-   //Game loop
-   while (game.running()){
-       //Update
-       game.update();
+    // Game loop
+    while (game.running())
+    {
+        // Update
+        game.update();
 
-       //Render
-       game.render();
-   }
+        // Render
+        game.render();
+    }
 
-   return 0;
-   
+    return 0;
 }

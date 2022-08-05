@@ -1,7 +1,6 @@
 #include "GameTextures.hpp"
 
-GameTextures::GameTextures(){
+GameTextures::GameTextures()
+{
     playerTexture.loadFromFile("assets/img/zorrito.png");
-
 }
-

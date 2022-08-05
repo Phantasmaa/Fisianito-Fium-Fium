@@ -4,44 +4,44 @@
 #include "Animation.hpp"
 #include "Collision.hpp"
 #include "GameTextures.hpp"
+#include "Entity.hpp"
 
-class Player {
-    private:
-        //Variables
-        sf::RectangleShape body;
-        //Private functions
-        void initVariables();
-        void initShape();
-        void initObjects();
-        
-    public:
-        //Objects
-        GameTextures texture;
-        Animation* animation;
+class Player : public Entity
+{
+private:
+    // Variables
+    // sf::RectangleShape body;
+    // Private functions
+    void initVariables();
+    void initObjects();
 
-        //Gravity Variables
-        int groundHeight;
-        int roofHeight;
-        float gravitySpeed;
-        bool isJumping;
+public:
+    // Objects
+    GameTextures texture;
+    Animation *animation;
 
-        //Animation variables
-        unsigned int row;
-        float moveSpeed;
-        bool faceRight;
+    // Gravity Variables
+    int groundHeight;
+    int roofHeight;
+    float gravitySpeed;
+    bool isJumping;
+    bool isOnPlatform;
 
-        //Constructor-Destructor
-        Player();
-        virtual ~Player();
+    // Animation variables
+    unsigned int row;
+    float moveSpeed;
+    bool faceRight;
 
-        //Functions
-        int getY();
-        void gravity();
-        void updateInput(float deltaTime);
-        void update();
-        void render(sf::RenderTarget* target);
+    // Constructor-Destructor
+    Player();
+    virtual ~Player();
 
-        //other functions
-        sf::Vector2f getPosition(){ return body.getPosition();}
-        Collision getCollision(){ return Collision(body);}
+    // Functions
+    void gravity();
+    void updateInput();
+    void update();
+
+    // other functions
+    sf::Vector2f getPosition() { return shape.getPosition(); }
+    Collision getCollision() { return Collision(shape); }
 };

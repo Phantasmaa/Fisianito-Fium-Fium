@@ -1,77 +1,94 @@
 #include "Game.hpp"
 
-//Constructor-Destructor
-Game::Game():
-    view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f,800.0f))    
+// Constructor-Destructor
+Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
 {
-    this->initVariables();
-    this->initWindow();
-    this->initObjects();
+    initVariables();
+    initEntitys();
+    initWindow();
 }
 
-Game::~Game(){
+Game::~Game()
+{
     delete this->window;
 }
 
-//Private Functions
-void Game::initVariables(){
+// Private Functions
+void Game::initVariables()
+{
     this->window = nullptr;
-    this->videoMode.width = 1600;
-    this->videoMode.height = 800;
-    this->deltaTime = 0.0f;
+    videoMode.width = 1600;
+    videoMode.height = 800;
+    deltaTime = 0.0f;
+    initObjects();
 }
 
-void Game::initWindow(){
+void Game::initWindow()
+{
     this->window = new sf::RenderWindow(this->videoMode, "GAME TESTING", sf::Style::Titlebar | sf::Style::Close);
     this->window->setKeyRepeatEnabled(true);
     this->window->setFramerateLimit(60);
 }
 
-void Game::initObjects(){
-    this->platform1 = new Platform(500.f,600.f);
-    this->platform2 = new Platform(800.f,500.f);
+void Game::initObjects()
+{
+    platform1.initAttributes(500, 600, 400, 50);
+    platform2.initAttributes(800, 500, 400, 50);
 }
 
-//Access
-const bool Game::running() const{
+void Game::initEntitys()
+{
+    player.initShape();
+    platform1.initShape();
+    platform2.initShape();
+}
+
+// Access
+const bool Game::running() const
+{
     return this->window->isOpen();
 }
 
-//Functions
-void Game::pollEvents(){
+// Functions
+void Game::pollEvents()
+{
     this->deltaTime = this->clock.restart().asSeconds();
-    while (this->window->pollEvent(this->ev)){
-        switch (this->ev.type){
-            case sf::Event::Closed:
+    while (this->window->pollEvent(this->ev))
+    {
+        switch (this->ev.type)
+        {
+        case sf::Event::Closed:
+            this->window->close();
+            break;
+
+        case sf::Event::KeyPressed:
+            if (this->ev.key.code == sf::Keyboard::Escape)
                 this->window->close();
-                break;
+            break;
 
-            case sf::Event::KeyPressed:
-                if (this->ev.key.code == sf::Keyboard::Escape)
-                    this->window->close();
-                break;
-
-            case sf::Event::KeyReleased:
-                this->player.isJumping = false;
-                break;
+        case sf::Event::KeyReleased:
+            player.isJumping = false;
+            break;
         }
     }
 }
 
-void Game::update(){
-    this->pollEvents();
-    this->player.update();
-    this->platform1->getCollision().checkCollision(c, 1.0f);
-    this->platform2->getCollision().checkCollision(c, 1.0f);
+void Game::update()
+{
+    pollEvents();
+    player.update();
+    platform1.getCollision().checkCollision(c, 1.0f);
+    platform2.getCollision().checkCollision(c, 1.0f);
 }
 
-void Game::render(){
-    this->window->clear();
-    this->window->setView(this->view);
-    this->view.setCenter(player.getPosition());
-    //Draw game objects 
-    this->player.render(this->window);
-    this->platform1->render(this->window);
-    this->platform2->render(this->window);
-    this->window->display();
+void Game::render()
+{
+    window->clear();
+    window->setView(this->view);
+    view.setCenter(player.getPosition());
+    // Draw game objects
+    player.renderOnGame(this->window);
+    platform1.renderOnGame(this->window);
+    platform2.renderOnGame(this->window);
+    window->display();
 }

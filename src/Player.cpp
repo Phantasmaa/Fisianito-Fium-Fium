@@ -1,92 +1,107 @@
 #include "Player.hpp"
 
-//Constructor-Destructor
-Player::Player(){
+// Constructor-Destructor
+Player::Player()
+{
     this->initVariables();
-    this->initShape();
+    // this->initShape();
+    this->shape.setOrigin(shape.getSize() / 2.0f);
     this->initObjects();
 }
 
-Player::~Player(){
-
+Player::~Player()
+{
 }
 
-//Private functions
-void Player::initVariables(){
-    //Gravity
-    this->groundHeight = 650;
-    this->roofHeight = 300;
-    this->gravitySpeed = 0.98f;
-    this->isJumping = false;
-    //Animation
-    this->moveSpeed = 50.f;
-    this->faceRight = true;
-    this->row = 0;
+// Private functions
+void Player::initVariables()
+{
+    // Position
+    groundHeight = 600;
+    roofHeight = 300;
+    posX = 20;
+    posY = groundHeight;
+    // Dimensions
+    width = 50.0;
+    height = 50.0;
+    // Speed
+    moveSpeed = 80.f;
+    gravitySpeed = 0.98f;
+    // Status
+    isJumping = false;
+    isOnPlatform = false;
 }
 
-void Player::initShape(){
-    this->body.setOrigin(body.getSize()/2.0f);
-    this->body.setPosition(20,this->groundHeight);
-    this->body.setSize(sf::Vector2f(30.f,30.f));
-    //this->body.setTexture(&texture.playerTexture);
-    this->body.setFillColor(sf::Color::Green);
+/*
+void Player::initShape()
+{
+    this->shape.setPosition(20, this->groundHeight);
+    this->shape.setSize(sf::Vector2f(30.f, 30.f));
+    // this->shape.setTexture(&texture.playerTexture);
+    this->shape.setFillColor(sf::Color::Green);
+}
+*/
+void Player::initObjects()
+{
+    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
 }
 
-void Player::initObjects(){
-    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2,5), 1.0f);
-}
+// Functions
 
-//Functions
-int Player::getY(){
-    return body.getPosition().y;
-}
-
-void Player::gravity(){
-    if(this->getY() < this->groundHeight && this->isJumping == false){
-        this->body.move(0.f,this->gravitySpeed);
+void Player::gravity()
+{
+    if (getYCord() < groundHeight && !isJumping && !isOnPlatform)
+    {
+        moveEntity(0.f, gravitySpeed);
     }
-
-    if(this->getY() > this->roofHeight){
-        
+    if (getYCord() > roofHeight)
+    {
     }
 }
 
-void Player::updateInput(float deltaTime){
-    sf::Vector2f movement(0.0f,0.0f);
-    //Keyboard inputs
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+void Player::updateInput()
+{
+    float deltaTime = 0.07f;
+    sf::Vector2f movement(0.0f, 0.0f);
+    // Keyboard inputs
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
         movement.y -= moveSpeed * deltaTime;
         isJumping = true;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
         movement.x -= moveSpeed * deltaTime;
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    {
         movement.x += moveSpeed * deltaTime;
     }
 
-    if(movement.x == 0.0f){
+    if (movement.x == 0.0f)
+    {
         row = 0;
     }
-    else{
+    else
+    {
         row = 1;
-        if(movement.x > 0.0f){
+        if (movement.x > 0.0f)
+        {
             faceRight = true;
         }
-        else{
+        else
+        {
             faceRight = false;
         }
     }
-    animation->update(row,deltaTime,faceRight);
-    this->body.setTextureRect(this->animation->uvRect);
-    body.move(movement);
-}
-void Player::update(){
-    this->gravity();
-    this->updateInput(0.07f);
-
+    animation->update(row, deltaTime, faceRight);
+    shape.setTextureRect(this->animation->uvRect);
+    shape.move(movement);
+    updateCords();
 }
 
-void Player::render(sf::RenderTarget* target){
-    target->draw(this->body);
+void Player::update()
+{
+    gravity();
+    updateInput();
 }
