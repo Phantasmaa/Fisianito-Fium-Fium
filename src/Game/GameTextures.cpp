@@ -1,4 +1,4 @@
-#include "GameTextures.hpp"
+#include "Game/GameTextures.hpp"
 
 GameTextures::GameTextures()
 {

@@ -5,42 +5,41 @@
 #include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
-
+#include "DataStructures/EntityNode.hpp"
 class Player : public Entity
 {
-private:
-    // Variables
-    // sf::RectangleShape body;
-    // Private functions
-    void initVariables();
-    void initObjects();
 
+// Constructor-Destructor
 public:
+    Player();
+    virtual ~Player();
+// Atributos
+public:
+    bool isJumping;
+private:
     // Objects
     GameTextures texture;
     Animation *animation;
-
     // Gravity Variables
     int groundHeight;
     int roofHeight;
     float gravitySpeed;
-    bool isJumping;
     bool isOnPlatform;
-
     // Animation variables
     unsigned int row;
     float moveSpeed;
     bool faceRight;
 
-    // Constructor-Destructor
-    Player();
-    virtual ~Player();
-
-    // Functions
+// Métodos
+private:
+    void initVariables();
+    void initObjects();
     void gravity();
     void updateInput();
+    bool playerIsOnPlatform(Entity platform);
+public:
     void update();
-
+    void checkCollisionWithPlatforms(EntityNode *platforms);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
     Collision getCollision() { return Collision(shape); }

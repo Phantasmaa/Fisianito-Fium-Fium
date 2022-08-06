@@ -1,5 +1,5 @@
-#include "Entity.hpp"
-
+#include "Game/Entity.hpp"
+#include <iostream>
 void Entity::initAttributes(int posX, int posY, float width, float height)
 {
     this->posX = posX;
@@ -49,4 +49,9 @@ void Entity::moveEntity(float x_movement, float y_movement)
 void Entity::renderOnGame(sf::RenderTarget *target)
 {
     target->draw(shape);
+}
+
+
+void Entity::logEntity(){
+    std::cout<<"\t\tX: "<<posX <<" Y: "<<posY<<std::endl;
 }

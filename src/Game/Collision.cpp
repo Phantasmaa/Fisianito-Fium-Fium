@@ -1,4 +1,4 @@
-#include "Collision.hpp"
+#include "Game/Collision.hpp"
 
 Collision::Collision(sf::RectangleShape &body) : body(body) {}
 

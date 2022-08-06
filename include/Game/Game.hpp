@@ -2,7 +2,7 @@
 
 #include "Player.hpp"
 #include "Platform.hpp"
-
+#include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
 class Game
@@ -21,15 +21,18 @@ private:
 
     // Game objects
     Player player;
-    Platform platform1;
-    Platform platform2;
-    Collision c = player.getCollision();
+    EntityNode *platforms;
 
     // Private functions
     void initVariables();
     void initWindow();
     void initEntitys();
     void initObjects();
+
+    // Platforms
+    void createPlatforms();
+    void initPlatforms();
+    void renderPlatforms();
 
 public:
     // Constructor-Destructor

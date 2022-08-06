@@ -8,8 +8,8 @@ public:
 
 protected:
     // Atributos
-    int posX;
-    int posY;
+    float posX;
+    float posY;
     float width;
     float height;
     sf::RectangleShape shape;
@@ -31,4 +31,5 @@ protected:
     // Render
 public:
     void renderOnGame(sf::RenderTarget *target);
+    void logEntity();
 };

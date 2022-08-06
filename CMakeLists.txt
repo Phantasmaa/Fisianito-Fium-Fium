@@ -10,21 +10,22 @@ find_package(SFML
 
 include_directories(include)
 add_executable(fisianito
-  include/Animation.hpp
-  include/Collision.hpp
-  include/Entity.hpp
-  include/Game.hpp
-  include/GameTextures.hpp
-  include/Platform.hpp
-  include/Player.hpp
-  src/Animation.cpp
-  src/Collision.cpp
-  src/Entity.cpp
-  src/Game.cpp
-  src/GameTextures.cpp
-  src/main.cpp
-  src/Platform.cpp
-  src/Player.cpp
+  include/Game/Animation.hpp
+  include/Game/Collision.hpp
+  include/Game/Entity.hpp
+  include/Game/Game.hpp
+  include/Game/GameTextures.hpp
+  include/Game/Platform.hpp
+  include/Game/Player.hpp
+  include/DataStructures/EntityNode.hpp
+  src/Game/Animation.cpp
+  src/Game/Collision.cpp
+  src/Game/Entity.cpp
+  src/Game/Game.cpp
+  src/Game/GameTextures.cpp
+  src/Game/main.cpp
+  src/Game/Platform.cpp
+  src/Game/Player.cpp
 )
 
 target_link_libraries(fisianito sfml-graphics)
