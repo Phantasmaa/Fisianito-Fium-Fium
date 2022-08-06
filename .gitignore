@@ -1,4 +1,9 @@
 .vscode/
+<<<<<<< HEAD
+=======
+bin/
+>>>>>>> origin/debug
 build/
 cmake-build-debug/
 .idea/
+Makefile
