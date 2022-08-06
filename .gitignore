@@ -1,6 +1,6 @@
 .vscode/
 CMakeLists.txt
-bin/
+bin/main
 cmake-build-debug/
 .idea/
 Makefile
