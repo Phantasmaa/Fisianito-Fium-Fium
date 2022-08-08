@@ -87,8 +87,9 @@ void Game::render()
     window->setView(this->view);
     view.setCenter(player.getPosition());
     // Draw game objects
-    player.renderOnGame(this->window);
     platform1.renderOnGame(this->window);
     platform2.renderOnGame(this->window);
+    player.renderOnGame(this->window);
+    
     window->display();
 }

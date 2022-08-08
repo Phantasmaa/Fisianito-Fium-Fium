@@ -13,6 +13,7 @@ protected:
     float width;
     float height;
     sf::RectangleShape shape;
+
     // Metodos
 public:
     // Inicializar variables

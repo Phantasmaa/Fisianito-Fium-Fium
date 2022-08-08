@@ -5,6 +5,7 @@
 class GameTextures
 {
 public:
-    GameTextures();
     sf::Texture playerTexture;
+
+    GameTextures();
 };

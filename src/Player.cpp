@@ -5,7 +5,9 @@ Player::Player()
 {
     this->initVariables();
     this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->shape.setTexture(&texture.playerTexture);
     this->initObjects();
+    //this->shape.setFillColor(sf::Color::Green);
 }
 
 Player::~Player()
@@ -26,11 +28,15 @@ void Player::initVariables()
     // Status
     isJumping = false;
     isOnPlatform = false;
+    isMoving=false;
+    
+
 }
 
 void Player::initObjects()
-{
-    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
+{  
+    this->animation = new Animation(getWitdh(),getHeight(),4);
+    shape.setTextureRect(this->animation->uvRect);
 }
 
 // Functions
@@ -59,30 +65,17 @@ void Player::updateInput()
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         movement.x -= moveSpeed * deltaTime;
+        faceRight=false;
+        isMoving=true;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         movement.x += moveSpeed * deltaTime;
+        faceRight=true;
+        isMoving=true;
     }
 
-    if (movement.x == 0.0f)
-    {
-        row = 0;
-    }
-    else
-    {
-        row = 1;
-        if (movement.x > 0.0f)
-        {
-            faceRight = true;
-        }
-        else
-        {
-            faceRight = false;
-        }
-    }
-    animation->update(row, deltaTime, faceRight);
-    shape.setTextureRect(this->animation->uvRect);
+    animation->update(deltaTime,isMoving, faceRight);
     shape.move(movement);
     updateCords();
 }

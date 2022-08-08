@@ -5,21 +5,25 @@
 class Animation
 {
 private:
-    sf::Vector2u imgCount;
-    sf::Vector2u currentImg;
-    float totalTime;
-    float switchTime;
-
     void initVariables();
 
 public:
+    //Nested Class para hacer listas circulares con los frames
+        class Frame{
+            //Variables
+            int leftX;
+            class Frame *nextFrame;
+        };
+
     // Variables
-    sf::IntRect uvRect;
+    int numSheet; //cuantas animaciones hay por spriteSheet
+    sf::IntRect uvRect; //Rectangulo que contiene lo mostrado
 
     // Constructor-Destructor
-    Animation(sf::Texture *texture, sf::Vector2u imgCount, float switchTime);
+    Animation(int rectWidth,int rectHeight, int numSheet);
     ~Animation();
 
     // Functions
-    void update(int row, float deltaTime, bool faceRight);
+    Frame *initFrames(int frames,int rectWidth);
+    void update(float deltaTime, bool isMoving, bool faceRight);
 };

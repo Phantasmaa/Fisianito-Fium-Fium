@@ -17,8 +17,9 @@ private:
 
 public:
     // Objects
-    GameTextures texture;
+    enum animationRow {iddle,runR,runL};
     Animation *animation;
+    GameTextures texture;
 
     // Gravity Variables
     int groundHeight;
@@ -28,9 +29,9 @@ public:
     bool isOnPlatform;
 
     // Animation variables
-    unsigned int row;
     float moveSpeed;
     bool faceRight;
+    bool isMoving;
 
     // Constructor-Destructor
     Player();
