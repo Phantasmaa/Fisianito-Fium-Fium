@@ -5,21 +5,6 @@ include(CTest)
 enable_testing()
 
 find_package(SFML
-<<<<<<< HEAD
-  COMPONENTS 
-    system window graphics audio REQUIRED)
-
-include_directories(include)
-add_executable(fisianito 
-            src/main.cpp
-            src/Game.cpp
-            src/Player.cpp
-            src/Entity.cpp
-            include/Game.hpp
-            include/Player.hpp
-            include/Entity.hpp
-            )
-=======
   COMPONENTS
   system window graphics audio REQUIRED)
 
@@ -43,7 +28,6 @@ add_executable(fisianito
   src/Game/Player.cpp
 )
 
->>>>>>> origin/debug
 target_link_libraries(fisianito sfml-graphics)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
