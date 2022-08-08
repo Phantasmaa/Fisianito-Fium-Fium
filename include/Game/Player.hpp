@@ -6,6 +6,10 @@
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
+
+
+enum JumpStatus{Neutral, FirstJump, SecondJump};
+
 class Player : public Entity
 {
 
@@ -24,7 +28,11 @@ private:
     int groundHeight;
     int roofHeight;
     float gravitySpeed;
+    float jumpSpeed;
+    float accelerationY;
     bool isOnPlatform;
+    bool hasJumped;
+    JumpStatus jumpStatus;
     // Animation variables
     unsigned int row;
     float moveSpeed;
@@ -36,8 +44,10 @@ private:
     void initObjects();
     void gravity();
     void updateInput();
+    bool isOnFloor();
     bool playerIsOnPlatform(Entity platform);
 public:
+    void handleJump();
     void update();
     void checkCollisionWithPlatforms(EntityNode *platforms);
     // other functions

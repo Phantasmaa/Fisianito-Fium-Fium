@@ -85,23 +85,29 @@ const bool Game::running() const
 // Functions
 void Game::pollEvents()
 {
-    this->deltaTime = this->clock.restart().asSeconds();
-    while (this->window->pollEvent(this->ev))
+    deltaTime = clock.restart().asSeconds();
+    while (window->pollEvent(ev))
     {
-        switch (this->ev.type)
+        switch (ev.type)
         {
         case sf::Event::Closed:
-            this->window->close();
+            window->close();
             break;
 
         case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Escape)
-                this->window->close();
+            if (ev.key.code == sf::Keyboard::Escape)
+                window->close();
             break;
 
-        case sf::Event::KeyReleased:
+        case sf::Event::KeyReleased:{
+            if(ev.key.code == sf::Keyboard::Space || ev.key.code == sf::Keyboard::W){
+                player.handleJump();
+            } else {
+
             player.isJumping = false;
+            }
             break;
+        }
         }
     }
 }
