@@ -7,14 +7,14 @@ Animation::Animation(int rectWidth,int rectHeight, int numSheet)
     this->uvRect=area;
     //Cantidad de animaciones en el SpreadSheet
     this->numSheet=numSheet;
-    Frame *animacions[numSheet];
+    //Frame *animacions[numSheet];
 
 }
 
 Animation::~Animation() {}
 
-Animation::Frame *initFrames(Animation::Frame &ciclo, int frames,int rectWidth)
-{
+//Frame *initFrames(Animation::Frame &ciclo, int frames,int rectWidth)
+//{
     /*TRABAJANDO EN LAS LINEAS
     Animation::Frame headFrames=ciclo;
 
@@ -34,23 +34,27 @@ Animation::Frame *initFrames(Animation::Frame &ciclo, int frames,int rectWidth)
     
     return 
     */
-}
+//}
 
-void Animation::update(float deltaTime, bool isMoving, bool faceRight)
+void Animation::update(bool isMoving, bool faceRight,sf::Clock clock)
 {
-    
-    if (isMoving)
-    {
-    
-    }
-    else{
-        if (faceRight)
-        {
-        
-        }
-        else
+    if (clock.getElapsedTime().asSeconds() >=2.0f){
+        /*if (isMoving)
         {
             
         }
+        else{
+            //if (faceRight)
+            //{*/
+                if (uvRect.left == 100)
+                    this->uvRect.left = 0;
+                else
+                    this->uvRect.left += 50;
+            /*}
+            else
+            {
+                
+            }*/
+       // }
     }
 }

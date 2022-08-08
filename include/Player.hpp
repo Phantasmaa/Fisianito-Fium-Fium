@@ -17,8 +17,14 @@ private:
 
 public:
     // Objects
-    enum animationRow {iddle,runR,runL};
+    int animationRow;
     Animation *animation;
+    //Ciclo de animaciones
+    Frame *iddleR;
+    Frame *iddleL;
+    Frame *runR;
+    Frame *runL;
+
     GameTextures texture;
 
     // Gravity Variables
@@ -40,7 +46,7 @@ public:
     // Functions
     void gravity();
     void updateInput();
-    void update();
+    void update(sf::Clock clock);
 
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }

@@ -74,14 +74,18 @@ void Player::updateInput()
         faceRight=true;
         isMoving=true;
     }
-
-    animation->update(deltaTime,isMoving, faceRight);
+    
     shape.move(movement);
     updateCords();
+    
 }
 
-void Player::update()
+void Player::update(sf::Clock clock)
 {
+    //Animacion
+    animation->update(isMoving,faceRight,clock);
+    shape.setTextureRect(this->animation->uvRect);
+
     gravity();
     updateInput();
 }

@@ -73,10 +73,10 @@ void Game::pollEvents()
     }
 }
 
-void Game::update()
+void Game::update(sf::Clock clock)
 {
     pollEvents();
-    player.update();
+    player.update(clock);
     platform1.getCollision().checkCollision(c, 1.0f);
     platform2.getCollision().checkCollision(c, 1.0f);
 }

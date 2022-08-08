@@ -8,13 +8,6 @@ private:
     void initVariables();
 
 public:
-    //Nested Class para hacer listas circulares con los frames
-        class Frame{
-            //Variables
-            int leftX;
-            class Frame *nextFrame;
-        };
-
     // Variables
     int numSheet; //cuantas animaciones hay por spriteSheet
     sf::IntRect uvRect; //Rectangulo que contiene lo mostrado
@@ -23,7 +16,13 @@ public:
     Animation(int rectWidth,int rectHeight, int numSheet);
     ~Animation();
 
-    // Functions
-    Frame *initFrames(int frames,int rectWidth);
-    void update(float deltaTime, bool isMoving, bool faceRight);
+    void update(bool isMoving, bool faceRight,sf::Clock clock);
+};
+
+class Frame
+{
+    public:
+    //Variables
+    int leftX;//coordenada x del Spreadsheet (Frame a utilizar)
+    class Frame *nextFrame; //punteor al siguiente
 };
