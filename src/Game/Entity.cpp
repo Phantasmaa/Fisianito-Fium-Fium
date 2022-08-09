@@ -11,7 +11,6 @@ void Entity::initAttributes(int posX, int posY, float width, float height)
 void Entity::initShape()
 {
     shape.setPosition(posX, posY);
-    shape.setFillColor(sf::Color::Green);
     shape.setSize(sf::Vector2f(width, height));
 }
 

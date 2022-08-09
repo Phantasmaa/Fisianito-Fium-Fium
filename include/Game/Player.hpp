@@ -36,6 +36,7 @@ private:
     void initObjects();
     void gravity();
     void updateInput();
+    void windowsCollision();
     bool playerIsOnPlatform(Entity platform);
 public:
     void update();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
+#include "Maps.hpp"
 #include "Platform.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
@@ -14,26 +15,21 @@ private:
     sf::VideoMode videoMode;
     sf::Event ev;
     // View
-    sf::View view;
+    //sf::View view;
     // Time
     float deltaTime;
     sf::Clock clock;
 
     // Game objects
     Player player;
-    EntityNode *platforms;
+    Platform ground;
+    Maps map;
 
     // Private functions
     void initVariables();
     void initWindow();
     void initEntitys();
     void initObjects();
-
-    // Platforms
-    void createPlatforms();
-    void initPlatforms();
-    void renderPlatforms();
-
 public:
     // Constructor-Destructor
     Game();
