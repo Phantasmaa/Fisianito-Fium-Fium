@@ -32,15 +32,18 @@ void Game::initWindow()
 
 void Game::initObjects()
 {
-    platform1.initAttributes(500, 600, 400, 50);
-    platform2.initAttributes(800, 500, 400, 50);
+    platform1.initAttributes(-100, 500, 100, 400);
+    platform2.initAttributes(800, 500, 100, 400);
+    platform3.initAttributes(-100, 670, 1000, 50);
 }
 
 void Game::initEntitys()
 {
     player.initShape();
-    platform1.initShape();
-    platform2.initShape();
+    enemy.initShape();
+    //platform1.initShape();
+    //platform2.initShape();
+    platform3.initShape();
 }
 
 // Access
@@ -77,8 +80,10 @@ void Game::update()
 {
     pollEvents();
     player.update();
-    platform1.getCollision().checkCollision(c, 1.0f);
-    platform2.getCollision().checkCollision(c, 1.0f);
+    enemy.update();
+    //platform1.getCollision().checkCollision(c, 1.0f);
+    //platform2.getCollision().checkCollision(c, 1.0f);
+    platform3.getCollision().checkCollision(c, 1.0f);
 }
 
 void Game::render()
@@ -88,7 +93,9 @@ void Game::render()
     view.setCenter(player.getPosition());
     // Draw game objects
     player.renderOnGame(this->window);
+    enemy.renderOnGame(this->window);
     platform1.renderOnGame(this->window);
     platform2.renderOnGame(this->window);
+    platform3.renderOnGame(this->window);
     window->display();
 }

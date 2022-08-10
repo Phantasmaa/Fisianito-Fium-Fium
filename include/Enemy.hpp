@@ -5,9 +5,8 @@
 #include "Collision.hpp"
 #include "GameTextures.hpp"
 #include "Entity.hpp"
-#include "Enemy.hpp"
 
-class Player : public Entity
+class Enemy : public Entity
 {
 private:
     // Variables
@@ -34,8 +33,8 @@ public:
     bool faceRight;
 
     // Constructor-Destructor
-    Player();
-    virtual ~Player();
+    Enemy();
+    virtual ~Enemy();
 
     // Functions
     void gravity();

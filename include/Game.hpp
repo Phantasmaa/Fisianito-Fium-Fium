@@ -2,6 +2,7 @@
 
 #include "Player.hpp"
 #include "Platform.hpp"
+#include "Enemy.hpp"
 
 /*Game engine class*/
 
@@ -21,8 +22,10 @@ private:
 
     // Game objects
     Player player;
+    Enemy enemy;
     Platform platform1;
     Platform platform2;
+    Platform platform3;
     Collision c = player.getCollision();
 
     // Private functions

@@ -5,8 +5,11 @@ Player::Player()
 {
     this->initVariables();
     this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->shape.setFillColor(sf::Color::Green);
     this->initObjects();
 }
+
+
 
 Player::~Player()
 {
@@ -45,6 +48,8 @@ void Player::gravity()
     {
     }
 }
+
+
 
 void Player::updateInput()
 {

@@ -4,9 +4,19 @@ project(fisianito VERSION 0.1.0)
 include(CTest)
 enable_testing()
 
-find_package(SFML
-  COMPONENTS
-  system window graphics audio REQUIRED)
+IF (WIN32)
+# Windows specific config
+  # Include local sfml cmake config
+  set(SFML_DIR "C:\\SFML-2.5.1\\lib\\cmake\\SFML")
+ENDIF()
+
+find_package(SFML 2.5.1 COMPONENTS graphics audio REQUIRED)
+
+## If you want to link SFML statically
+# set(SFML_STATIC_LIBRARIES TRUE)
+
+## In most cases better set in the CMake cache
+
 
 include_directories(include)
 add_executable(fisianito
@@ -17,6 +27,7 @@ add_executable(fisianito
   include/GameTextures.hpp
   include/Platform.hpp
   include/Player.hpp
+  include/Enemy.hpp
   src/Animation.cpp
   src/Collision.cpp
   src/Entity.cpp
@@ -25,9 +36,10 @@ add_executable(fisianito
   src/main.cpp
   src/Platform.cpp
   src/Player.cpp
+  src/Enemy.cpp
 )
 
-target_link_libraries(fisianito sfml-graphics)
+target_link_libraries(fisianito sfml-graphics sfml-audio)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
