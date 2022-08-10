@@ -38,6 +38,7 @@ void Game::initEntitys()
 {
     player.initShape();
     map.initPlatforms();
+    map.initObjects();
     this->ground.initAttributes(0,670,1280.0f,100.0f);
     this->ground.initShape();
 }
@@ -76,6 +77,7 @@ void Game::update()
 {
     pollEvents();
     player.checkCollisionWithPlatforms(map.platforms);
+    player.checkCollisionWithObjects(map.objects);
     player.update();
 }
 
@@ -86,5 +88,6 @@ void Game::render()
     player.renderOnGame(this->window);
     ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
+    map.renderObjects(this->window);
     window->display();
 }

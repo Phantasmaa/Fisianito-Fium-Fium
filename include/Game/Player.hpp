@@ -41,7 +41,7 @@ private:
 public:
     void update();
     void checkCollisionWithPlatforms(EntityNode *platforms);
+    void checkCollisionWithObjects(EntityNode *objects);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
-    Collision getCollision() { return Collision(shape); }
 };

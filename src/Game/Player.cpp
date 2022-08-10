@@ -107,6 +107,19 @@ void Player::windowsCollision()
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
+void Player::checkCollisionWithObjects(EntityNode *objects){
+    EntityNode *head = objects;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            shape.setFillColor(sf::Color::Red);
+            return;
+        }
+        head = head->next_node;
+    }
+}
+
 void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
@@ -143,26 +156,3 @@ bool Player::playerIsOnPlatform(Entity platform)
         return true;
     return false;
 }
-
-
-
-/*
-bool Player::playerIsOnPlatform(Entity platform)
-{
-    /*
-    Si la coordenada Y de player es platform.y - 50
-    y la coordenada X de player está entre platform.X y platform.X + platform.width
-    entonces player está sobre platform
-    
-    int minusLimitOnX = platform.getXCord() - width;
-    int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
-    //int limitOnY = platform.getYCord() - this->height;
-    int minusLimitOnY = platform.getYCord() - height;
-    int superiorLimitOnY = platform.getYCord() + platform.getHeight();
-
-    if (posX > minusLimitOnX && posX < superiorLimitOnX && posY > minusLimitOnY && posY < superiorLimitOnY){
-        return true;
-    }
-    return false;
-}
-*/

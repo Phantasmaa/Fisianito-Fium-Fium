@@ -20,5 +20,4 @@ public:
     void update();
 
     // Collision functions
-    Collision getCollision() { return Collision(shape); }
 };

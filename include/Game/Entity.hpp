@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <Game/Collision.hpp>
 #pragma once
 class Entity
 {

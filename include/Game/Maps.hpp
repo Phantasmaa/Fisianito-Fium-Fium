@@ -16,18 +16,23 @@ class Maps : public Entity{
         float heightPlatform;
         float widthPlaform;
 
-        //Movement variables
-        float velocityX;
+        //Variables object
+        float heightObject;
+        float widthObject;
 
         //Init functions
         void initVariables();
         //Platform functions
         void createPlatforms();
+        //Objects
+        void createObjects();
 
     public:
         //Platform attributes & functions
         EntityNode *platforms;
-        Entity animate_platform;
+        EntityNode *objects;
+        void initObjects();
+        void renderObjects(sf::RenderTarget *target);
         void initPlatforms();
         void renderPlatforms(sf::RenderTarget *target);
 };
