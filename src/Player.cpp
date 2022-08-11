@@ -66,6 +66,7 @@ void Player::updateInput()
 {
     float deltaTime = 0.07f;
     sf::Vector2f movement(0.0f, 0.0f);
+    getAction();
     // Keyboard inputs
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
@@ -86,22 +87,12 @@ void Player::updateInput()
     }
     else{
         isMoving=false;
+        isJumping =false;
     }
     
     shape.move(movement);
     updateCords();
     
-}
-
-void Player::update(float dt)
-{
-    gravity();
-    updateInput();
-
-    //Animacion
-    getAction();
-    animation->update(animationRow,currentCycle,dt);
-    shape.setTextureRect(this->animation->uvRect);
 }
 
 void Player:: getAction()
@@ -126,12 +117,22 @@ void Player:: getAction()
     }
 
     else{
-        animationRow=iddleRow;
         if(faceRight){
             currentCycle=frameCycles[iddleR];
         }
         else currentCycle=frameCycles[iddleL];
+        animationRow=iddleRow;
     }
+}
+
+void Player::update(float dt)
+{
+    gravity();
+    updateInput();
+
+    //Animacion
+    animation->update(animationRow,currentCycle,dt);
+    shape.setTextureRect(this->animation->uvRect);
 }
 
 void Player::createAnimationCycle(){
@@ -143,8 +144,8 @@ void Player::createAnimationCycle(){
             numFrames=3;
         }
         else numFrames=7;
-        
-        if(animationRow==0 && i==1) startX=150;
+
+        if(i==1) startX=150;
         else startX=0;
 
         this->frameCycles[i]=new Frame();

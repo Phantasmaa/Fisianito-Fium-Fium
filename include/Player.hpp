@@ -21,16 +21,12 @@ public:
     enum animationTop {iddleRow, runR, runL, jumpR, jumpL};
     enum animationFrame {iddleR, iddleL, runJump, hitR, hitL};
     Animation *animation;
+    //Animacion actual
+    Frame *currentCycle;
     //Ciclo de animaciones total
     Frame *frameCycles[5];
     void createAnimationCycle();
-    /*Frame *iddleR;
-    Frame *iddleL;
-    Frame *runAndJump;
-    Frame *hitHurtR;
-    Frame *hitHurtL;*/
-    //Animacion actual
-    Frame *currentCycle;
+ 
 
     GameTextures texture;
 
