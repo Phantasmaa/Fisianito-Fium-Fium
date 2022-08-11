@@ -23,8 +23,8 @@ void Player::initVariables()
     this->initAttributes(20, groundHeight, 50.f, 50.f);
     // Speed
     moveSpeed = 80.f;
-    gravitySpeed = 2.0f;
-    jumpSpeed = 10.0f;
+    gravitySpeed = 1.0f;
+    jumpSpeed = 20.0f;
     accelerationY = 0.0f;
     jumpStatus = Neutral;
     // Status
@@ -41,14 +41,20 @@ void Player::initObjects()
 
 void Player::gravity()
 {
-    if ((isOnFloor() || isOnPlatform) && !isJumping)
+    if (isOnFloor() || isOnPlatform)
     {
         accelerationY = 0.0;
-    } else {
-        accelerationY += gravitySpeed;
     }
-     
-    moveEntity(0.0f, accelerationY);
+    else
+    {
+        if (accelerationY + posY <= 600.0f)
+            accelerationY += gravitySpeed;
+        else
+        {
+            accelerationY = 0.0;
+        }
+    }
+    std::cout << "Acceleracion Y: " << accelerationY << std::endl;
 }
 
 void Player::updateInput()
@@ -56,6 +62,12 @@ void Player::updateInput()
     float deltaTime = 0.07f;
     sf::Vector2f movement(0.0f, 0.0f);
     // Keyboard inputs
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+    {
+        // salta carajito
+        movement.y -= jumpSpeed;
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
@@ -84,6 +96,8 @@ void Player::updateInput()
     }
     animation->update(row, deltaTime, faceRight);
     shape.setTextureRect(this->animation->uvRect);
+    movement.y += accelerationY;
+
     shape.move(movement);
     updateCords();
 }
@@ -96,53 +110,15 @@ void Player::update()
 
 void Player::handleJump()
 {
-    if(isOnFloor() || isOnPlatform){
-        jumpStatus == Neutral;
-    }
-    switch (jumpStatus)
-    {
-    case JumpStatus::Neutral:
-    {
-        std::cout << "Neutral" << std::endl;
-        jumpStatus = FirstJump;
-        isJumping = true;
-        accelerationY -= jumpSpeed;
-        break;
-    }
-    case JumpStatus::FirstJump:
-    {
-        std::cout << "First Jump" << std::endl;
-        jumpStatus = SecondJump;
-        accelerationY -= jumpSpeed;
-        isJumping = true;
-        break;
-    }
-    case JumpStatus::SecondJump:
-    {
-        if (isOnFloor() || isOnPlatform)
-        {
-            accelerationY -= jumpSpeed;
-            jumpStatus = Neutral;
-            isJumping = true;
-        } else {
-            isJumping = false;
-        }
-        std::cout << "Second Jump" << std::endl;
-        
-        break;
-    }
-
-    default:
-        break;
-    }
-    updateCords();
 }
 
 void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
+
     while (head)
     {
+
         if (playerIsOnPlatform(head->value))
         {
             isOnPlatform = true;
@@ -169,6 +145,11 @@ bool Player::playerIsOnPlatform(Entity platform)
     y la coordenada X de player está entre platform.X y platform.X + platform.width
     entonces player está sobre platform
     */
+    std::cout << "Log player: \n";
+    this->logEntity();
+    std::cout << "Log platform: \n";
+    platform.logEntity();
+
     int minusLimitOnX = platform.getXCord() - width;
     int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
     int limitOnY = platform.getYCord() - this->height;

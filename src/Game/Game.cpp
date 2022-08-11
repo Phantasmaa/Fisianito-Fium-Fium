@@ -21,7 +21,7 @@ void Game::initVariables()
     videoMode.width = 640;
     videoMode.height = 480;
     deltaTime = 0.0f;
-    //initObjects();
+    // initObjects();
 }
 
 void Game::initWindow()
@@ -41,12 +41,13 @@ void Game::initEntitys()
     initPlatforms();
 }
 
-
-void Game::createPlatforms(){
+void Game::createPlatforms()
+{
     platforms = new EntityNode();
-    int baseX = 500, baseY = 600;
+    int baseX = 500, baseY = 550;
     EntityNode *head = platforms;
-    for(int i = 0; i < 6; i ++){
+    for (int i = 0; i < 1; i++)
+    {
         Platform platform;
         int addX = 300 * i;
         int addY = 100 * i;
@@ -55,22 +56,23 @@ void Game::createPlatforms(){
         head->next_node = new EntityNode();
         head = head->next_node;
     }
-
 }
 
-
-void Game::initPlatforms(){
+void Game::initPlatforms()
+{
     EntityNode *head = platforms;
-    while(head){
+    while (head)
+    {
         head->value.initShape();
         head = head->next_node;
     }
 }
 
-
-void Game::renderPlatforms(){
+void Game::renderPlatforms()
+{
     EntityNode *head = platforms;
-    while(head){
+    while (head)
+    {
         head->value.renderOnGame(this->window);
         head = head->next_node;
     }
@@ -99,13 +101,10 @@ void Game::pollEvents()
                 window->close();
             break;
 
-        case sf::Event::KeyReleased:{
-            if(ev.key.code == sf::Keyboard::Space || ev.key.code == sf::Keyboard::W){
-                player.handleJump();
-            } else {
-
+        case sf::Event::KeyReleased:
+        {
             player.isJumping = false;
-            }
+
             break;
         }
         }

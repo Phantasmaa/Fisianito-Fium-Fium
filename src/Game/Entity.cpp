@@ -44,6 +44,7 @@ void Entity::updateCords()
 void Entity::moveEntity(float x_movement, float y_movement)
 {
     shape.move(x_movement, y_movement);
+    updateCords();
 }
 
 void Entity::renderOnGame(sf::RenderTarget *target)
@@ -51,7 +52,7 @@ void Entity::renderOnGame(sf::RenderTarget *target)
     target->draw(shape);
 }
 
-
-void Entity::logEntity(){
-    std::cout<<"\t\tX: "<<posX <<" Y: "<<posY<<std::endl;
+void Entity::logEntity()
+{
+    std::cout << "\t\tX: " << posX << " Y: " << posY << std::endl;
 }
