@@ -33,7 +33,7 @@ public:
     bool isOnPlatform;
     int getRandomNumber(int a, int b);
 
-protected:
+//protected:
     void updateCords();
 
 public:

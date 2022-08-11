@@ -13,35 +13,24 @@ public:
     Enemy();
     virtual ~Enemy();
 private:
-    // Variables
-    // sf::RectangleShape body;
-    // Private functions
     void initVariables();
     void initObjects();
 
 public:
     // Objects
     GameTextures texture;
-    Animation *animation;
 
-    // Gravity Variables
+    // Gravity & Speed Variables
     int groundHeight;
-    int roofHeight;
-    float gravitySpeed;
     bool isJumping;
-
-    // Animation variables
+    float gravitySpeed;
     float moveSpeed;
     float fallSpeed;
-    unsigned int row;
-    bool faceRight;
-
 private:
     bool playerIsOnPlatform(Entity platform);
 
 public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
-
     // Functions
     void initEnemy();
     void moveEnemy();

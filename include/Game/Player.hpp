@@ -9,7 +9,7 @@
 class Player : public Entity
 {
 
-// Constructor-Destructor
+//Constructor-Destructor
 public:
     Player();
     virtual ~Player();

@@ -18,7 +18,7 @@ void Maps::initVariables(){
     this->heightObject = 20.0f;
 }
 
-//Platform functions
+//Create & Render Platforms
 void Maps::createPlatforms(){
     platforms = new EntityNode();
     EntityNode *head = platforms;
@@ -69,7 +69,7 @@ void Maps::renderPlatforms(sf::RenderTarget *target){
     }
 }
 
-//Objects functions
+//Create & Render Objects
 void Maps::createObjects(){
     objects = new EntityNode();
     EntityNode *head = objects;

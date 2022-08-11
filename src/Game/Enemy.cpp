@@ -8,27 +8,21 @@ Enemy::Enemy()
     this->initObjects();
 }
 
-Enemy::~Enemy()
-{
-}
+Enemy::~Enemy(){}
 
 // Private functions
 void Enemy::initVariables()
 {
     // Position
     groundHeight = 100.0f;
-    roofHeight = 600;
     // Speed
     moveSpeed = 50.f;
     fallSpeed = 10.0f;
     gravitySpeed = 0.98f;
-    // Status
-    //isOnPlatform = false;
 }
 
 void Enemy::initEnemy(){
     this->initAttributes(0, groundHeight, 50.f, 50.f);
-    this->shape.setOrigin(shape.getSize() / 2.0f);
     this->shape.setFillColor(sf::Color::Blue);
 }
 
@@ -56,7 +50,6 @@ void Enemy::moveEnemy(){
 
 void Enemy::initObjects()
 {
-    this->animation = new Animation(&texture.playerTexture, sf::Vector2u(2, 5), 1.0f);
 }
 
 void Enemy::gravity()
