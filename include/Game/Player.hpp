@@ -50,7 +50,6 @@ private:
     void gravity();
     void updateInput();
     bool isOnFloor();
-    bool playerIsOnPlatform(Entity platform);
 
 public:
     void handleJump();
@@ -58,5 +57,4 @@ public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
-    Collision getCollision() { return Collision(shape); }
 };

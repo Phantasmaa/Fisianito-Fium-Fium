@@ -44,13 +44,13 @@ void Game::initEntitys()
 void Game::createPlatforms()
 {
     platforms = new EntityNode();
-    int baseX = 500, baseY = 550;
+    int baseX = 500, baseY = 500;
     EntityNode *head = platforms;
-    for (int i = 0; i < 1; i++)
+    for (int i = 0; i < 3; i++)
     {
         Platform platform;
         int addX = 300 * i;
-        int addY = 100 * i;
+        int addY = 200 * i;
         platform.initAttributes(baseX + addX, baseY - addY, 400.0f, 50.0f);
         head->value = platform;
         head->next_node = new EntityNode();
@@ -103,8 +103,8 @@ void Game::pollEvents()
 
         case sf::Event::KeyReleased:
         {
+            player.movementDirection = Directions::Down;
             player.isJumping = false;
-
             break;
         }
         }

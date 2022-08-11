@@ -1,5 +1,21 @@
-#include <SFML/Graphics.hpp>
 #pragma once
+#include <SFML/Graphics.hpp>
+
+enum CollisionDirection
+{
+    Top,
+    Bottom,
+    Null
+};
+enum Directions
+{
+    Up,
+    Down,
+    Left,
+    Right,
+    Static
+
+};
 class Entity
 {
     // Constructores
@@ -13,14 +29,18 @@ protected:
     float width;
     float height;
     sf::RectangleShape shape;
+
+public:
+    Directions movementDirection;
+
     // Metodos
 public:
     // Inicializar variables
     void initAttributes(int posX = 0, int posY = 0, float width = 0.0, float height = 0.0);
     void initShape();
     // Devolver datos
-    int getYCord();
-    int getXCord();
+    float getYCord();
+    float getXCord();
     float getWitdh();
     float getHeight();
 
@@ -28,6 +48,8 @@ protected:
     void updateCords();
     // Metodos de movimiento
     void moveEntity(float x_movement, float y_movement);
+    CollisionDirection checkCollision(Entity entity);
+
     // Render
 public:
     void renderOnGame(sf::RenderTarget *target);
