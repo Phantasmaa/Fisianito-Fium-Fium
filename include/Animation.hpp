@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <Frame.hpp>
 
 class Animation
 {
@@ -10,22 +11,15 @@ private:
 public:
     // Variables
     int numSheet; //cuantas animaciones hay por spriteSheet
-    double switchTime; //second per frame de la animacion
-    double totalTime;
+    float switchTime; //second per frame de la animacion
+    float totalTime;
 
     sf::IntRect uvRect; //Rectangulo que contiene lo mostrado
 
     // Constructor-Destructor
-    Animation(int rectWidth,int rectHeight, int numSheet,double switchTime);
+    Animation(int rectWidth,int rectHeight, int numSheet,float switchTime);
     ~Animation();
-
-    void update(bool isMoving, bool faceRight,bool isJumping, float deltaTime);
-};
-
-class Frame
-{
-    public:
-    //Variables
-    int leftX;//coordenada x del Spreadsheet (Frame a utilizar)
-    class Frame *nextFrame; //punteor al siguiente
+    
+    void update(int animationRow, Frame *frames, float deltaTime);
+    
 };

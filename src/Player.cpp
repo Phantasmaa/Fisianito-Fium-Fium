@@ -7,7 +7,6 @@ Player::Player()
     this->shape.setOrigin(shape.getSize() / 2.0f);
     this->shape.setTexture(&texture.playerTexture);
     this->initObjects();
-    //this->shape.setFillColor(sf::Color::Green);
 }
 
 Player::~Player()
@@ -35,11 +34,43 @@ void Player::initVariables()
 
 void Player::initObjects()
 {  
-    this->animation = new Animation(getWitdh(),getHeight(),4,1);
+    //Animacion general inicio
+    this->animation = new Animation(getWitdh(),getHeight(),4,1.5);
     shape.setTextureRect(this->animation->uvRect);
+    
+    //creando ciclos de animacion
+    this->fillFrames(3,getWitdh(),0,iddleL);
+    /*this->fillFrames(3,getWitdh(),150,iddleR);
+    this->fillFrames(7,getWitdh(),0,runAndJump);
+    this->fillFrames(2,getWitdh(),0,hitHurtR);
+    this->fillFrames(2,getWitdh(),100,hitHurtL);*/
+    
+
 }
 
 // Functions
+void Player::fillFrames(int numFrames,int startX, int rectWidth, Frame *frames)
+{
+    Frame *head=frames;
+    //Iteración para hacer una lista segun la longitud de la animacion de cada ciclo
+    for (int i=0; i < numFrames; i++)
+    {
+        Frame *newFrame=NULL;
+        newFrame->leftX=i*rectWidth + startX;
+
+        //Insertado al Final
+        if(frames==NULL){
+            frames=newFrame;
+            newFrame->nextFrame=frames;
+        }
+        while(head->nextFrame !=NULL){
+            head=head->nextFrame;
+        }
+        head->nextFrame=newFrame;
+        newFrame->nextFrame=frames;
+    }
+}
+
 
 void Player::gravity()
 {
@@ -89,6 +120,36 @@ void Player::update(float dt)
     updateInput();
 
     //Animacion
-    animation->update(isMoving,faceRight,isJumping,dt);
+    animation->update(animationRow,currentCycle,dt);
     shape.setTextureRect(this->animation->uvRect);
+}
+
+void Player:: getAction()
+{
+    if(isMoving){
+
+        if(faceRight){
+            animationRow=runR;
+        }
+        else animationRow=runL;
+        currentCycle=runAndJump;
+    }
+
+    else if(isJumping){
+
+        if(faceRight){
+            animationRow=jumpR;
+        }
+        else animationRow=jumpL;
+
+        currentCycle=runAndJump;
+    }
+
+    else{
+        animationRow=iddleRow;
+        if(faceRight){
+            currentCycle=iddleR;
+        }
+        else currentCycle=iddleL;
+    }
 }
