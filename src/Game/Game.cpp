@@ -1,7 +1,7 @@
 #include "Game/Game.hpp"
 
 // Constructor-Destructor
-Game::Game()
+Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
 {
     initVariables();
     initEntitys();
@@ -20,7 +20,7 @@ void Game::initVariables()
     videoMode.width = 1280;
     videoMode.height = 720;
     deltaTime = 0.0f;
-    //initObjects();
+    // initObjects();
 }
 
 void Game::initWindow()
@@ -30,17 +30,13 @@ void Game::initWindow()
     this->window->setFramerateLimit(60);
 }
 
-void Game::initObjects()
-{
-}
-
 void Game::initEntitys()
 {
     player.initShape();
     enemy.initShape();
     map.initPlatforms();
     map.initObjects();
-    this->ground.initAttributes(0,670,1280.0f,100.0f);
+    this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
 }
 
@@ -53,23 +49,26 @@ const bool Game::running() const
 // Functions
 void Game::pollEvents()
 {
-    this->deltaTime = this->clock.restart().asSeconds();
-    while (this->window->pollEvent(this->ev))
+    deltaTime = clock.restart().asSeconds();
+    while (window->pollEvent(ev))
     {
-        switch (this->ev.type)
+        switch (ev.type)
         {
         case sf::Event::Closed:
-            this->window->close();
+            window->close();
             break;
 
         case sf::Event::KeyPressed:
-            if (this->ev.key.code == sf::Keyboard::Escape)
-                this->window->close();
+            if (ev.key.code == sf::Keyboard::Escape)
+                window->close();
             break;
 
         case sf::Event::KeyReleased:
+        {
+            player.movementDirection = Directions::Down;
             player.isJumping = false;
             break;
+        }
         }
     }
 }
@@ -77,21 +76,21 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
-    player.checkCollisionWithPlatforms(map.platforms);
+    player.update(map.platforms);
     enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
-    player.update();
     enemy.update();
 }
 
 void Game::render()
 {
     window->clear();
-    // Draw game objects
+    //   Draw game objects
     player.renderOnGame(this->window);
     ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
     enemy.renderOnGame(this->window);
+    // renderPlatforms();
     window->display();
 }

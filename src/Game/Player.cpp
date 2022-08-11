@@ -1,12 +1,12 @@
 #include "Game/Player.hpp"
 #include <iostream>
+#include <math.h>
 
 // Constructor-Destructor
 Player::Player()
 {
     this->initVariables();
     this->initPlayer();
-    // this->shape.setTexture(&texture.playerTexture);
     this->initObjects();
 }
 
@@ -20,15 +20,21 @@ void Player::initVariables()
     // Position
     groundHeight = 620;
     roofHeight = 300;
+    // Dimensions
+    this->initAttributes(20, groundHeight, 50.f, 50.f);
     // Speed
     moveSpeed = 80.f;
-    gravitySpeed = 2.0f;
+    gravitySpeed = 1.0f;
+    jumpSpeed = 20.0f;
+    accelerationY = 0.0f;
+    jumpStatus = Neutral;
     // Status
     isJumping = false;
-    //isOnPlatform = false;
+    isOnPlatform = false;
 }
 
-void Player::initPlayer(){
+void Player::initPlayer()
+{
     this->initAttributes(20, groundHeight, 50.f, 50.f);
     this->shape.setOrigin(shape.getSize() / 2.0f);
     this->shape.setFillColor(sf::Color::Green);
@@ -43,9 +49,18 @@ void Player::initObjects()
 
 void Player::gravity()
 {
-    if (getYCord() < groundHeight && !isJumping && !isOnPlatform)
+
+    if (isOnFloor() || isOnPlatform && !isJumping)
     {
-        moveEntity(0.f, gravitySpeed);
+        accelerationY = 0.0;
+        movementDirection = Directions::Static;
+    }
+    else
+    {
+        if (accelerationY + posY < groundHeight)
+            accelerationY += gravitySpeed;
+        else
+            accelerationY = 0.0;
     }
 }
 
@@ -53,13 +68,33 @@ void Player::updateInput()
 {
     float deltaTime = 0.07f;
     sf::Vector2f movement(0.0f, 0.0f);
+    float velocityY = 0.0f;
     // Keyboard inputs
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    handleKeyPressed(velocityY, movement, deltaTime);
+    animation->update(row, deltaTime, faceRight);
+    shape.setTextureRect(this->animation->uvRect);
+    velocityY = fabs(velocityY);
+
+    if (movementDirection == Directions::Up)
+        velocityY *= -1.0f;
+
+    velocityY += accelerationY;
+    movement.y = velocityY;
+    shape.move(movement);
+    updateCords();
+}
+
+void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime)
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && movementDirection != Directions::Down)
     {
-        movement.y -= moveSpeed * deltaTime;
+        // salta carajito
+        velocityY -= jumpSpeed;
+        movementDirection = Directions::Up;
         isJumping = true;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
         movement.x -= moveSpeed * deltaTime;
     }
@@ -84,20 +119,18 @@ void Player::updateInput()
             faceRight = false;
         }
     }
-    animation->update(row, deltaTime, faceRight);
-    shape.setTextureRect(this->animation->uvRect);
-    shape.move(movement);
-    updateCords();
 }
 
-void Player::update()
-{   
-    gravity();
+void Player::update(EntityNode *platforms)
+{
     updateInput();
+    checkCollisionWithPlatforms(platforms);
+    gravity();
     windowsCollision();
+    // logEntity();
 }
 
-//Collision Player
+// Collision Player
 void Player::windowsCollision()
 {
     // Left collision
@@ -111,54 +144,65 @@ void Player::windowsCollision()
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
-void Player::checkCollisionWithObjects(EntityNode *objects){
+void Player::checkCollisionWithPlatforms(EntityNode *platforms)
+{
+    EntityNode *head = platforms;
+
+    while (head->next_node)
+    {
+
+        Entity platform = head->value;
+        switch (this->checkCollision(platform))
+        {
+        case CollisionDirection::Top:
+        {
+            isOnPlatform = true;
+            isJumping = false;
+            movementDirection = Directions::Static;
+            return;
+        }
+        /* code */
+        case CollisionDirection::Bottom:
+        {
+
+            accelerationY *= 1.0f;
+            isJumping = false;
+            movementDirection = Directions::Down;
+            return;
+        }
+        case CollisionDirection::Null:
+            isOnPlatform = false;
+            break;
+        default:
+            break;
+        }
+
+        head = head->next_node;
+    }
+}
+
+void Player::checkCollisionWithObjects(EntityNode *objects)
+{
     EntityNode *head = objects;
     while (head)
     {
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
             shape.setFillColor(sf::Color::Red);
-            std::cout<<"muere"<<std::endl;
+            std::cout << "muere" << std::endl;
             return;
         }
         shape.setFillColor(sf::Color::Green);
         head = head->next_node;
     }
 }
-
-void Player::checkCollisionWithPlatforms(EntityNode *platforms)
-{
-    EntityNode *head = platforms;
-    while (head)
-    {
-        if (playerIsOnPlatform(head->value))
-        {
-            isOnPlatform = true;
-            return;
-        }
-        head = head->next_node;
-    }
-    isOnPlatform = false;
-}
-
 inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E-5f)
 {
-    return abs(x - y) <= epsilon;
+
+    return fabs(x - y) <= epsilon;
 }
 
-
-bool Player::playerIsOnPlatform(Entity platform)
+bool Player::isOnFloor()
 {
-    /*
-    Si la coordenada Y de player es platform.y - 50
-    y la coordenada X de player está entre platform.X y platform.X + platform.width
-    entonces player está sobre platform
-    */
-    int minusLimitOnX = platform.getXCord() - width;
-    int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
-    int limitOnY = platform.getYCord() - this->height;
-
-    if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
-        return true;
-    return false;
+    return getYCord() == groundHeight;
 }

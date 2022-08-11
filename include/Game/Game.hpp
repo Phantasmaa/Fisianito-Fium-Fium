@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Player.hpp"
+#include "Platform.hpp"
 #include "Enemy.hpp"
 #include "Maps.hpp"
-#include "Platform.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
@@ -16,7 +16,7 @@ private:
     sf::VideoMode videoMode;
     sf::Event ev;
     // View
-    //sf::View view;
+    sf::View view;
     // Time
     float deltaTime;
     sf::Clock clock;
@@ -31,7 +31,7 @@ private:
     void initVariables();
     void initWindow();
     void initEntitys();
-    void initObjects();
+
 public:
     // Constructor-Destructor
     Game();

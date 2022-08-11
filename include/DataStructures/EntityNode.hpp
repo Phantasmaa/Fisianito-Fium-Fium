@@ -1,5 +1,7 @@
 #include "Game/Entity.hpp"
 #pragma once
+
+
 class EntityNode{
     public:
     Entity value;

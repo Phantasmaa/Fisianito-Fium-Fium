@@ -15,7 +15,8 @@ void Collision::windowsCollision()
         shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
-void Collision::checkCollisionWithObjects(EntityNode *objects){
+void Collision::checkCollisionWithObjects(EntityNode *objects)
+{
     EntityNode *head = objects;
     while (head)
     {
@@ -34,14 +35,14 @@ void Collision::checkCollisionWithPlatforms(EntityNode *platforms)
     while (head)
     {
         if (entityIsOnPlatform(head->value))
-        {   
+        {
             shape.setFillColor(sf::Color::Cyan);
             isOnPlatform = true;
             return;
         }
         head = head->next_node;
     }
-    //std::cout<<head->value.getYCord()<<std::endl;
+    // std::cout<<head->value.getYCord()<<std::endl;
     isOnPlatform = false;
 }
 
@@ -49,7 +50,6 @@ inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E
 {
     return abs(x - y) <= epsilon;
 }
-
 
 bool Collision::entityIsOnPlatform(Entity platform)
 {

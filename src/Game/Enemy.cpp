@@ -8,7 +8,7 @@ Enemy::Enemy()
     this->initObjects();
 }
 
-Enemy::~Enemy(){}
+Enemy::~Enemy() {}
 
 // Private functions
 void Enemy::initVariables()
@@ -21,29 +21,34 @@ void Enemy::initVariables()
     gravitySpeed = 0.98f;
 }
 
-void Enemy::initEnemy(){
+void Enemy::initEnemy()
+{
     this->initAttributes(0, groundHeight, 50.f, 50.f);
     this->shape.setFillColor(sf::Color::Blue);
 }
 
-void Enemy::moveEnemy(){
+void Enemy::moveEnemy()
+{
     float deltatime = 0.07f;
-	sf::Vector2f movement(0.0f,0.0f);
+    sf::Vector2f movement(0.0f, 0.0f);
 
-    if(shape.getPosition().x < 0 || shape.getPosition().x + shape.getGlobalBounds().width > 1280){
+    if (shape.getPosition().x < 0 || shape.getPosition().x + shape.getGlobalBounds().width > 1280)
+    {
         moveSpeed *= -1;
     }
 
-    if(!isOnPlatform){
-        fallSpeed =getRandomNumber(5,10);
-        movement.y += fallSpeed*deltatime;
+    if (!isOnPlatform)
+    {
+        fallSpeed = getRandomNumber(5, 10);
+        movement.y += fallSpeed * deltatime;
     }
 
-    if(shape.getPosition().y + shape.getGlobalBounds().height > 670){
+    if (shape.getPosition().y + shape.getGlobalBounds().height > 670)
+    {
         movement.y = 0;
     }
 
-    movement.x += moveSpeed*deltatime;
+    movement.x += moveSpeed * deltatime;
     shape.move(movement);
     this->updateCords();
 }
@@ -66,7 +71,7 @@ void Enemy::update()
     gravity();
 }
 
-//Collision Enemy
+// Collision Enemy
 void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
@@ -87,7 +92,6 @@ inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E
 {
     return abs(x - y) <= epsilon;
 }
-
 
 bool Enemy::playerIsOnPlatform(Entity platform)
 {

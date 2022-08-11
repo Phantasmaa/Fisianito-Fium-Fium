@@ -1,4 +1,6 @@
 #include "Game/Entity.hpp"
+#include <iostream>
+#include <math.h>
 
 void Entity::initAttributes(int posX, int posY, float width, float height)
 {
@@ -6,23 +8,24 @@ void Entity::initAttributes(int posX, int posY, float width, float height)
     this->posY = posY;
     this->width = width;
     this->height = height;
+    this->movementDirection = Directions::Static;
 }
 
 void Entity::initShape()
 {
     shape.setPosition(posX, posY);
+    shape.setFillColor(sf::Color::White);
     shape.setSize(sf::Vector2f(width, height));
-    isOnPlatform = false;
 }
 
-int Entity::getXCord()
+float Entity::getXCord()
 {
-    return posX;
+    return shape.getPosition().x;
 }
 
-int Entity::getYCord()
+float Entity::getYCord()
 {
-    return posY;
+    return shape.getPosition().y;
 }
 
 float Entity::getWitdh()
@@ -42,8 +45,9 @@ void Entity::updateCords()
 }
 
 void Entity::moveEntity(float x_movement, float y_movement)
-{   
+{
     shape.move(x_movement, y_movement);
+    updateCords();
 }
 
 void Entity::renderOnGame(sf::RenderTarget *target)
@@ -51,14 +55,38 @@ void Entity::renderOnGame(sf::RenderTarget *target)
     target->draw(shape);
 }
 
-int Entity::getRandomNumber(int a, int b){
-    std::srand(static_cast<unsigned>(time(NULL)));
-    int num;
-    num = a+rand() % static_cast<int> (b+1-a);
-    return num;
+void Entity::logEntity()
+{
+    std::cout << "\t\tX: " << posX << " Y: " << posY << std::endl;
 }
 
+CollisionDirection Entity::checkCollision(Entity entity)
+{
+    float distanceBetweenEntitys = posY - entity.getYCord();
+    if (shape.getGlobalBounds().intersects(entity.getShape().getGlobalBounds()))
+    {
+        float offset = entity.getYCord() - posY + height;
+        if (distanceBetweenEntitys < 0)
+        {
+            shape.setPosition(posX, entity.getYCord() - height);
+            updateCords();
+            return CollisionDirection::Top;
+        }
+        else
+        {
+            shape.setPosition(posX, entity.getYCord() + height);
+            updateCords();
 
-void Entity::logEntity(){
-    std::cout<<"\t\tX: "<<posX <<" Y: "<<posY<<std::endl;
+            return CollisionDirection::Bottom;
+        }
+    }
+    return CollisionDirection::Null;
+}
+
+int Entity::getRandomNumber(int a, int b)
+{
+    srand(time(NULL));
+    int num;
+    num = a + rand() % (b + 1 - a);
+    return num;
 }
