@@ -23,7 +23,7 @@ public:
     ~Animation();
     
 
-    void update(int animationRow, Frame *frameCycle, float deltaTime);
+    void update(int animationRow, Frame *&frameCycle, float deltaTime);
     
     
 };

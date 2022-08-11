@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <iostream>
 
 // Constructor-Destructor
 Player::Player()
@@ -66,7 +67,6 @@ void Player::updateInput()
 {
     float deltaTime = 0.07f;
     sf::Vector2f movement(0.0f, 0.0f);
-    getAction();
     // Keyboard inputs
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) or sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
@@ -89,7 +89,7 @@ void Player::updateInput()
         isMoving=false;
         isJumping =false;
     }
-    
+    getAction();
     shape.move(movement);
     updateCords();
     
@@ -121,6 +121,7 @@ void Player:: getAction()
             currentCycle=frameCycles[iddleR];
         }
         else currentCycle=frameCycles[iddleL];
+
         animationRow=iddleRow;
     }
 }
@@ -129,8 +130,9 @@ void Player::update(float dt)
 {
     gravity();
     updateInput();
-
+    
     //Animacion
+    //std::cout<<"\nEje X:"<<this->animation->uvRect.width;
     animation->update(animationRow,currentCycle,dt);
     shape.setTextureRect(this->animation->uvRect);
 }
@@ -140,59 +142,34 @@ void Player::createAnimationCycle(){
     int startX;
     for(int i=0; i<5;i++){
 
-        if(i<=1){
+        if(i!=2){
             numFrames=3;
         }
         else numFrames=7;
 
-        if(i==1) startX=150;
+        if(i==1 || i==4) startX=150;
         else startX=0;
 
-        this->frameCycles[i]=new Frame();
-        Frame *head =this->frameCycles[i];
+        frameCycles[i]=new Frame();
+        Frame *head=frameCycles[i];
 
         for(int j=0;j<numFrames;j++){
 
             Frame frame;
-            frame.leftX=j*getWitdh() + startX;
+            frame.leftX=j*50 +startX;
             head->leftX=frame.leftX;
-            head->nextFrame=new Frame();
-            head=head->nextFrame;
-        }
-        //Insertado al Final
-        if(frameCycles[i]==NULL){
             frameCycles[i]=head;
-            head->nextFrame=frameCycles[i];
+            std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->leftX;
+            frameCycles[i]=frameCycles[i]->nextFrame;
+            
+            head->nextFrame=head;
+            if(head->nextFrame==NULL)
+            {
+                head=head->nextFrame;
+            }
         }
-        while(head->nextFrame !=NULL){
-            head=head->nextFrame;
-        }
-        head->nextFrame=head;
-        frameCycles[i]=head;
-
+        head->nextFrame=frameCycles[i];
+        frameCycles[i]->nextFrame=head;
+        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->leftX;
     }
 }
-
-/*void Player::initFrames()
-{
-    for(int i=0; i<5;i++){
-    Frame *head = frameCycles[i];
-    //Iteración para hacer una lista segun la longitud de la animacion de cada ciclo
-    for (int i=0; i < numFrames; i++)
-    {
-        Frame *newFrame=NULL;
-        newFrame->leftX=i*rectWidth + startX;
-
-        //Insertado al Final
-        if(frames==NULL){
-            frames=newFrame;
-            newFrame->nextFrame=frames;
-        }
-        while(head->nextFrame !=NULL){
-            head=head->nextFrame;
-        }
-        head->nextFrame=newFrame;
-        newFrame->nextFrame=frames;
-    }
-    }
-}*/

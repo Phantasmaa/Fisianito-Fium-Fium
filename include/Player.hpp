@@ -24,7 +24,7 @@ public:
     //Animacion actual
     Frame *currentCycle;
     //Ciclo de animaciones total
-    Frame *frameCycles[5];
+    Frame *frameCycles[4];
     void createAnimationCycle();
  
 

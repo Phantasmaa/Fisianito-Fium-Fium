@@ -17,7 +17,7 @@ Animation::Animation(int rectWidth,int rectHeight, int numSheet,float switchTime
 Animation::~Animation() {}
 
 
-void Animation::update(int animationRow, Frame *frameCycle, float deltaTime)
+void Animation::update(int animationRow, Frame *&frameCycle, float deltaTime)
 {   
     totalTime += deltaTime;
     if (totalTime>=switchTime){
