@@ -114,8 +114,7 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
-    player.checkCollisionWithPlatforms(platforms);
-    player.update();
+    player.update(platforms);
 }
 
 void Game::render()

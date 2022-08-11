@@ -1,5 +1,6 @@
 #include "Game/Player.hpp"
 #include <iostream>
+#include <math.h>
 
 // Constructor-Destructor
 Player::Player()
@@ -47,14 +48,11 @@ void Player::gravity()
     }
     else
     {
-        if (accelerationY + posY <= 600.0f)
+        if (accelerationY + posY < 600.0f)
             accelerationY += gravitySpeed;
         else
-        {
             accelerationY = 0.0;
-        }
     }
-    std::cout << "Acceleracion Y: " << accelerationY << std::endl;
 }
 
 void Player::updateInput()
@@ -102,10 +100,11 @@ void Player::updateInput()
     updateCords();
 }
 
-void Player::update()
+void Player::update(EntityNode *platforms)
 {
-    gravity();
     updateInput();
+    checkCollisionWithPlatforms(platforms);
+    gravity();
 }
 
 void Player::handleJump()
@@ -116,11 +115,13 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 {
     EntityNode *head = platforms;
 
-    while (head)
+    while (head->next_node)
     {
 
-        if (playerIsOnPlatform(head->value))
+        Entity platform = head->value;
+        if (playerIsOnPlatform(platform))
         {
+            std::cout << "Is on platform\n";
             isOnPlatform = true;
             return;
         }
@@ -131,7 +132,8 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
 
 inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E-5f)
 {
-    return abs(x - y) <= epsilon;
+    std::cout << "Abs: " << fabs(x - y) << std::endl;
+    return fabs(x - y) <= 0.1;
 }
 
 bool Player::isOnFloor()
@@ -145,16 +147,13 @@ bool Player::playerIsOnPlatform(Entity platform)
     y la coordenada X de player está entre platform.X y platform.X + platform.width
     entonces player está sobre platform
     */
-    std::cout << "Log player: \n";
-    this->logEntity();
-    std::cout << "Log platform: \n";
-    platform.logEntity();
+    // std::cout << "Log platform: \n";
+    // platform.logEntity();
 
     int minusLimitOnX = platform.getXCord() - width;
     int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
     int limitOnY = platform.getYCord() - this->height;
-
-    if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
+    if (posX >= minusLimitOnX && posX <= superiorLimitOnX && epsilonEquals(posY, limitOnY))
         return true;
     return false;
 }
