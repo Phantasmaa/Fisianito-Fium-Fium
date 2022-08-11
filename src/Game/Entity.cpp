@@ -62,27 +62,23 @@ void Entity::logEntity()
 
 CollisionDirection Entity::checkCollision(Entity entity)
 {
-    /*
-Si la coordenada Y de player es platform.y - 50
-y la coordenada X de player está entre platform.X y platform.X + platform.width
-entonces player está sobre platform
-*/
-    // Limites en X
-    int minusLimitOnX = entity.getXCord() - (width / 2.0f);
-    int superiorLimitOnX = entity.getXCord() + entity.getWitdh();
-    // Limite en Y
-    float centerOfPlayer = posY + height / 2.0f;
-    float centerOfPlatformOnY = entity.getYCord() + entity.getHeight() / 2.0f;
-    float distanceBetweenCenters = centerOfPlatformOnY - centerOfPlayer;
-    float limitOnY = (height + entity.getHeight()) / 2.0f;
-    bool distanteIsCloseToLimit = fabs(distanceBetweenCenters) <= limitOnY;
-
-    if (posX >= minusLimitOnX && posX <= superiorLimitOnX && distanteIsCloseToLimit)
+    float distanceBetweenEntitys = posY - entity.getYCord();
+    if (shape.getGlobalBounds().intersects(entity.getShape().getGlobalBounds()))
     {
-        if (distanceBetweenCenters > 0)
+        float offset = entity.getYCord() - posY + height;
+        if (distanceBetweenEntitys < 0)
+        {
+            shape.setPosition(posX, entity.getYCord() - height);
+            updateCords();
             return CollisionDirection::Top;
+        }
         else
+        {
+            shape.setPosition(posX, entity.getYCord() + height);
+            updateCords();
+
             return CollisionDirection::Bottom;
+        }
     }
     return CollisionDirection::Null;
 }

@@ -50,7 +50,7 @@ private:
     void initPlayer();
     void gravity();
     void updateInput();
-    void handleKeyPressed();
+    void handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime);
     bool isOnFloor();
 
 public:

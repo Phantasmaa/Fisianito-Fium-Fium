@@ -6,7 +6,6 @@
 Player::Player()
 {
     this->initVariables();
-    // this->shape.setOrigin(shape.getSize() / 2.0f);
     this->initPlayer();
     this->initObjects();
 }
@@ -50,6 +49,7 @@ void Player::initObjects()
 
 void Player::gravity()
 {
+
     if (isOnFloor() || isOnPlatform && !isJumping)
     {
         accelerationY = 0.0;
@@ -70,7 +70,22 @@ void Player::updateInput()
     sf::Vector2f movement(0.0f, 0.0f);
     float velocityY = 0.0f;
     // Keyboard inputs
+    handleKeyPressed(velocityY, movement, deltaTime);
+    animation->update(row, deltaTime, faceRight);
+    shape.setTextureRect(this->animation->uvRect);
+    velocityY = fabs(velocityY);
 
+    if (movementDirection == Directions::Up)
+        velocityY *= -1.0f;
+
+    velocityY += accelerationY;
+    movement.y = velocityY;
+    shape.move(movement);
+    updateCords();
+}
+
+void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime)
+{
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && movementDirection != Directions::Down)
     {
         // salta carajito
@@ -104,39 +119,17 @@ void Player::updateInput()
             faceRight = false;
         }
     }
-
-    animation->update(row, deltaTime, faceRight);
-    shape.setTextureRect(this->animation->uvRect);
-    velocityY = fabs(velocityY);
-
-    if (movementDirection == Directions::Up)
-    {
-        velocityY *= -1.0f;
-        std::cout << "Arribaaa" << std::endl;
-    }
-    else if (movementDirection == Directions::Down)
-    {
-
-        std::cout << "Abajooo" << std::endl;
-    }
-    velocityY += accelerationY;
-
-    std::cout << "Velocity: " << velocityY << std::endl;
-    movement.y = velocityY;
-    shape.move(movement);
-    updateCords();
 }
 
-void Player::handleKeyPressed()
-{
-}
 void Player::update(EntityNode *platforms)
 {
     updateInput();
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
+    // logEntity();
 }
+
 // Collision Player
 void Player::windowsCollision()
 {
@@ -163,7 +156,6 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
         {
         case CollisionDirection::Top:
         {
-            std::cout << "Collision with top\n";
             isOnPlatform = true;
             isJumping = false;
             movementDirection = Directions::Static;
@@ -173,14 +165,14 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
         case CollisionDirection::Bottom:
         {
 
-            std::cout << "Collision with bottom\n";
-            accelerationY *= 3.0f;
+            accelerationY *= 1.0f;
             isJumping = false;
             movementDirection = Directions::Down;
             return;
         }
         case CollisionDirection::Null:
             isOnPlatform = false;
+            break;
         default:
             break;
         }
