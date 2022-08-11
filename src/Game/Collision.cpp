@@ -1,52 +1,68 @@
 #include "Game/Collision.hpp"
 
-Collision::Collision(sf::RectangleShape &body) : body(body) {}
+Collision::Collision(sf::RectangleShape &shape) : shape(shape) {}
 
-Collision::~Collision() {}
-
-bool Collision::checkCollision(Collision &other, float push)
+void Collision::windowsCollision()
 {
+    // Left collision
+    if (shape.getPosition().x < 0.0f)
+        shape.setPosition(0.0f, shape.getPosition().y);
+    // Top collision
+    if (shape.getPosition().y < 0.0f)
+        shape.setPosition(shape.getPosition().x, 0.0f);
+    // RIght collision
+    if (shape.getPosition().x + shape.getGlobalBounds().width > 1280.0f)
+        shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
+}
 
-    sf::Vector2f otherPosition = other.getPosition();
-    sf::Vector2f otherHalfSize = other.getHalfSize();
-    sf::Vector2f thisPosition = getPosition();
-    sf::Vector2f thisHalfSize = getHalfSize();
-
-    float deltaX = otherPosition.x - thisPosition.x;
-    float deltaY = otherPosition.y - thisPosition.y;
-    float intersectX = abs(deltaX) - (otherHalfSize.x + thisHalfSize.x);
-    float intersectY = abs(deltaY) - (otherHalfSize.y + thisHalfSize.y);
-
-    if (intersectX < 0.0f && intersectY < 0.0f)
+void Collision::checkCollisionWithObjects(EntityNode *objects)
+{
+    EntityNode *head = objects;
+    while (head)
     {
-        push = std::min(std::max(push, 0.0f), 1.0f);
-        if (intersectX > intersectY)
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
-            if (deltaX > 0.0f)
-            {
-                move(intersectX * (1.0f - push), 0.0f);
-                other.move(-intersectX * push, 0.0f);
-            }
-            else
-            {
-                move(-intersectX * (1.0f - push), 0.0f);
-                other.move(intersectX * push, 0.0f);
-            }
+            shape.setFillColor(sf::Color::Red);
+            return;
         }
-        else
-        {
-            if (deltaY > 0.0f)
-            {
-                move(0.0f, intersectY * (1.0f - push));
-                other.move(0.0f, -intersectY * push);
-            }
-            else
-            {
-                move(0.0f, -intersectY * (1.0f - push));
-                other.move(0.0f, intersectY * push);
-            }
-        }
-        return true;
+        head = head->next_node;
     }
+}
+
+void Collision::checkCollisionWithPlatforms(EntityNode *platforms)
+{
+    EntityNode *head = platforms;
+    while (head)
+    {
+        if (entityIsOnPlatform(head->value))
+        {
+            shape.setFillColor(sf::Color::Cyan);
+            isOnPlatform = true;
+            return;
+        }
+        head = head->next_node;
+    }
+    // std::cout<<head->value.getYCord()<<std::endl;
+    isOnPlatform = false;
+}
+
+inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E-5f)
+{
+    return abs(x - y) <= epsilon;
+}
+
+bool Collision::entityIsOnPlatform(Entity platform)
+{
+    /*
+    Si la coordenada Y de player es platform.y - 50
+    y la coordenada X de player está entre platform.X y platform.X + platform.width
+    entonces player está sobre platform
+    */
+    int minusLimitOnX = platform.getXCord() - width;
+    int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
+    int limitOnY = platform.getYCord() - height;
+
+    if (posX > minusLimitOnX && posX < superiorLimitOnX && epsilonEquals(posY, limitOnY))
+        return true;
     return false;
 }

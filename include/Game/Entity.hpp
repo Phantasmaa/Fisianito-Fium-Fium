@@ -32,6 +32,8 @@ protected:
 
 public:
     Directions movementDirection;
+    // Platform
+    bool isOnPlatform;
 
     // Metodos
 public:
@@ -53,5 +55,7 @@ protected:
     // Render
 public:
     void renderOnGame(sf::RenderTarget *target);
+    int getRandomNumber(int a, int b);
+    sf::RectangleShape getShape() { return this->shape; }
     void logEntity();
 };

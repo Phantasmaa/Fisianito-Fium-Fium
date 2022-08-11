@@ -6,7 +6,8 @@
 Player::Player()
 {
     this->initVariables();
-    this->shape.setOrigin(shape.getSize() / 2.0f);
+    // this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->initPlayer();
     this->initObjects();
 }
 
@@ -18,7 +19,7 @@ Player::~Player()
 void Player::initVariables()
 {
     // Position
-    groundHeight = 600;
+    groundHeight = 620;
     roofHeight = 300;
     // Dimensions
     this->initAttributes(20, groundHeight, 50.f, 50.f);
@@ -31,6 +32,13 @@ void Player::initVariables()
     // Status
     isJumping = false;
     isOnPlatform = false;
+}
+
+void Player::initPlayer()
+{
+    this->initAttributes(20, groundHeight, 50.f, 50.f);
+    this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->shape.setFillColor(sf::Color::Green);
 }
 
 void Player::initObjects()
@@ -48,7 +56,7 @@ void Player::gravity()
     }
     else
     {
-        if (accelerationY + posY < 600.0f)
+        if (accelerationY + posY < groundHeight)
             accelerationY += gravitySpeed;
         else
             accelerationY = 0.0;
@@ -121,11 +129,20 @@ void Player::update(EntityNode *platforms)
     updateInput();
     checkCollisionWithPlatforms(platforms);
     gravity();
-    // logEntity();
+    windowsCollision();
 }
-
-void Player::handleJump()
+// Collision Player
+void Player::windowsCollision()
 {
+    // Left collision
+    if (shape.getPosition().x < 0.0f)
+        shape.setPosition(0.0f, shape.getPosition().y);
+    // Top collision
+    if (shape.getPosition().y < 0.0f)
+        shape.setPosition(shape.getPosition().x, 0.0f);
+    // RIght collision
+    if (shape.getPosition().x + shape.getGlobalBounds().width > 1280.0f)
+        shape.setPosition(1280.0f - shape.getGlobalBounds().width, shape.getPosition().y);
 }
 
 void Player::checkCollisionWithPlatforms(EntityNode *platforms)
@@ -151,7 +168,7 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
         {
 
             std::cout << "Collision with bottom\n";
-            accelerationY *= 1.5f;
+            accelerationY *= 3.0f;
             isJumping = false;
             movementDirection = Directions::Down;
             return;
@@ -166,6 +183,21 @@ void Player::checkCollisionWithPlatforms(EntityNode *platforms)
     }
 }
 
+void Player::checkCollisionWithObjects(EntityNode *objects)
+{
+    EntityNode *head = objects;
+    while (head)
+    {
+        if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
+        {
+            shape.setFillColor(sf::Color::Red);
+            std::cout << "muere" << std::endl;
+            return;
+        }
+        shape.setFillColor(sf::Color::Green);
+        head = head->next_node;
+    }
+}
 inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E-5f)
 {
 

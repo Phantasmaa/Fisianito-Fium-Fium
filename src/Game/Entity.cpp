@@ -86,3 +86,11 @@ entonces player está sobre platform
     }
     return CollisionDirection::Null;
 }
+
+int Entity::getRandomNumber(int a, int b)
+{
+    srand(time(NULL));
+    int num;
+    num = a + rand() % (b + 1 - a);
+    return num;
+}

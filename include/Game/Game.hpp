@@ -2,6 +2,8 @@
 
 #include "Player.hpp"
 #include "Platform.hpp"
+#include "Enemy.hpp"
+#include "Maps.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
@@ -22,6 +24,9 @@ private:
     // Game objects
     Player player;
     EntityNode *platforms;
+    Enemy enemy;
+    Platform ground;
+    Maps map;
 
     // Private functions
     void initVariables();

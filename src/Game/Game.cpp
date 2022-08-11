@@ -4,7 +4,7 @@
 Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
 {
     initVariables();
-    createPlatforms();
+    // createPlatforms();
     initEntitys();
     initWindow();
 }
@@ -18,8 +18,8 @@ Game::~Game()
 void Game::initVariables()
 {
     this->window = nullptr;
-    videoMode.width = 640;
-    videoMode.height = 480;
+    videoMode.width = 1280;
+    videoMode.height = 720;
     deltaTime = 0.0f;
     // initObjects();
 }
@@ -38,7 +38,11 @@ void Game::initObjects()
 void Game::initEntitys()
 {
     player.initShape();
-    initPlatforms();
+    // initPlatforms();
+    map.initPlatforms();
+    map.initObjects();
+    this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
+    this->ground.initShape();
 }
 
 void Game::createPlatforms()
@@ -114,16 +118,20 @@ void Game::pollEvents()
 void Game::update()
 {
     pollEvents();
-    player.update(platforms);
+    player.update(map.platforms);
+    enemy.checkCollisionWithPlatforms(map.platforms);
+    player.checkCollisionWithObjects(map.objects);
+    enemy.update();
 }
 
 void Game::render()
 {
     window->clear();
-    window->setView(this->view);
-    view.setCenter(player.getPosition());
-    // Draw game objects
+    //   Draw game objects
     player.renderOnGame(this->window);
-    renderPlatforms();
+    map.renderPlatforms(this->window);
+    map.renderObjects(this->window);
+    enemy.renderOnGame(this->window);
+    // renderPlatforms();
     window->display();
 }

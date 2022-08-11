@@ -47,6 +47,7 @@ private:
 private:
     void initVariables();
     void initObjects();
+    void initPlayer();
     void gravity();
     void updateInput();
     bool isOnFloor();
@@ -55,6 +56,8 @@ public:
     void handleJump();
     void update(EntityNode *platforms);
     void checkCollisionWithPlatforms(EntityNode *platforms);
+    void windowsCollision();
+    void checkCollisionWithObjects(EntityNode *objects);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
 };
