@@ -53,6 +53,7 @@ void Player::gravity()
     if (isOnFloor() || isOnPlatform && !isJumping)
     {
         accelerationY = 0.0;
+        movementDirection = Directions::Static;
     }
     else
     {
@@ -70,7 +71,7 @@ void Player::updateInput()
     float velocityY = 0.0f;
     // Keyboard inputs
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::W) && movementDirection != Directions::Down)
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && movementDirection != Directions::Down)
     {
         // salta carajito
         velocityY -= jumpSpeed;
@@ -103,9 +104,11 @@ void Player::updateInput()
             faceRight = false;
         }
     }
+
     animation->update(row, deltaTime, faceRight);
     shape.setTextureRect(this->animation->uvRect);
     velocityY = fabs(velocityY);
+
     if (movementDirection == Directions::Up)
     {
         velocityY *= -1.0f;
@@ -124,6 +127,9 @@ void Player::updateInput()
     updateCords();
 }
 
+void Player::handleKeyPressed()
+{
+}
 void Player::update(EntityNode *platforms)
 {
     updateInput();

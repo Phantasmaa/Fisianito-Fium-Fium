@@ -4,7 +4,6 @@
 Game::Game() : view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(1600.0f, 800.0f))
 {
     initVariables();
-    // createPlatforms();
     initEntitys();
     initWindow();
 }
@@ -31,10 +30,6 @@ void Game::initWindow()
     this->window->setFramerateLimit(60);
 }
 
-void Game::initObjects()
-{
-}
-
 void Game::initEntitys()
 {
     player.initShape();
@@ -43,43 +38,6 @@ void Game::initEntitys()
     map.initObjects();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
-}
-
-void Game::createPlatforms()
-{
-    platforms = new EntityNode();
-    int baseX = 500, baseY = 500;
-    EntityNode *head = platforms;
-    for (int i = 0; i < 3; i++)
-    {
-        Platform platform;
-        int addX = 300 * i;
-        int addY = 200 * i;
-        platform.initAttributes(baseX + addX, baseY - addY, 400.0f, 50.0f);
-        head->value = platform;
-        head->next_node = new EntityNode();
-        head = head->next_node;
-    }
-}
-
-void Game::initPlatforms()
-{
-    EntityNode *head = platforms;
-    while (head)
-    {
-        head->value.initShape();
-        head = head->next_node;
-    }
-}
-
-void Game::renderPlatforms()
-{
-    EntityNode *head = platforms;
-    while (head)
-    {
-        head->value.renderOnGame(this->window);
-        head = head->next_node;
-    }
 }
 
 // Access
@@ -129,6 +87,7 @@ void Game::render()
     window->clear();
     //   Draw game objects
     player.renderOnGame(this->window);
+    ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
     enemy.renderOnGame(this->window);

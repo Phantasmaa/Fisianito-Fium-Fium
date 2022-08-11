@@ -50,6 +50,7 @@ private:
     void initPlayer();
     void gravity();
     void updateInput();
+    void handleKeyPressed();
     bool isOnFloor();
 
 public:

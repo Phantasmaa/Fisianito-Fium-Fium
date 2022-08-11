@@ -23,7 +23,6 @@ private:
 
     // Game objects
     Player player;
-    EntityNode *platforms;
     Enemy enemy;
     Platform ground;
     Maps map;
@@ -32,12 +31,6 @@ private:
     void initVariables();
     void initWindow();
     void initEntitys();
-    void initObjects();
-
-    // Platforms
-    void createPlatforms();
-    void initPlatforms();
-    void renderPlatforms();
 
 public:
     // Constructor-Destructor
