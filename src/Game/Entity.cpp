@@ -52,9 +52,9 @@ void Entity::renderOnGame(sf::RenderTarget *target)
 }
 
 int Entity::getRandomNumber(int a, int b){
-    srand(time(NULL));
+    std::srand(static_cast<unsigned>(time(NULL)));
     int num;
-    num = a+rand()%(b+1-a);
+    num = a+rand() % static_cast<int> (b+1-a);
     return num;
 }
 
