@@ -5,8 +5,7 @@
 Player::Player()
 {
     this->initVariables();
-    this->shape.setOrigin(shape.getSize() / 2.0f);
-    this->shape.setFillColor(sf::Color::Green);
+    this->initPlayer();
     // this->shape.setTexture(&texture.playerTexture);
     this->initObjects();
 }
@@ -21,14 +20,18 @@ void Player::initVariables()
     // Position
     groundHeight = 620;
     roofHeight = 300;
-    // Dimensions
-    this->initAttributes(20, groundHeight, 50.f, 50.f);
     // Speed
     moveSpeed = 80.f;
     gravitySpeed = 2.0f;
     // Status
     isJumping = false;
-    isOnPlatform = false;
+    //isOnPlatform = false;
+}
+
+void Player::initPlayer(){
+    this->initAttributes(20, groundHeight, 50.f, 50.f);
+    this->shape.setOrigin(shape.getSize() / 2.0f);
+    this->shape.setFillColor(sf::Color::Green);
 }
 
 void Player::initObjects()
@@ -88,12 +91,13 @@ void Player::updateInput()
 }
 
 void Player::update()
-{
+{   
     gravity();
     updateInput();
     windowsCollision();
 }
 
+//Collision Player
 void Player::windowsCollision()
 {
     // Left collision
@@ -114,8 +118,10 @@ void Player::checkCollisionWithObjects(EntityNode *objects){
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
             shape.setFillColor(sf::Color::Red);
+            std::cout<<"muere"<<std::endl;
             return;
         }
+        shape.setFillColor(sf::Color::Green);
         head = head->next_node;
     }
 }

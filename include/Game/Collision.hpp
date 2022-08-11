@@ -1,22 +1,24 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-//#include <iostream>
+#include "Entity.hpp"
+#include "DataStructures/EntityNode.hpp"
+#include <iostream>
 
-class Collision {
-    private: 
-        sf::RectangleShape& body;
+class Collision : public Entity{
+    private:
+        sf::RectangleShape &shape;
     public:
-        //Variables
-
         //Constructor-Destructor
-        Collision(sf::RectangleShape& body);
-        virtual ~Collision();
-
-        //Functions
-        bool checkCollision(Collision& other, float push);
-        sf::Vector2f getPosition(){ return body.getPosition();}
-        sf::Vector2f getHalfSize(){ return body.getSize()/2.0f;}
-        void move(float dx, float dy){ body.move(dx,dy);}
-
+        Collision(sf::RectangleShape &shape);
+        virtual ~Collision(){};
+    public: 
+        void initVariables();
+    private:
+        //bool isOnPlatform;
+        bool entityIsOnPlatform(Entity platform);
+    public:
+        void windowsCollision();
+        void checkCollisionWithPlatforms(EntityNode *platforms);
+        void checkCollisionWithObjects(EntityNode *objects);
 };

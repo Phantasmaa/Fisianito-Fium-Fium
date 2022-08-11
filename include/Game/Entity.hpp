@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <Game/Collision.hpp>
+#include <iostream>
+//#include "Collision.hpp"
 #pragma once
 class Entity
 {
@@ -27,6 +28,10 @@ public:
     float getWitdh();
     float getHeight();
     sf::RectangleShape getShape(){ return this->shape;}
+
+    //Platform
+    bool isOnPlatform;
+    int getRandomNumber(int a, int b);
 
 protected:
     void updateCords();

@@ -24,7 +24,7 @@ private:
     int groundHeight;
     int roofHeight;
     float gravitySpeed;
-    bool isOnPlatform;
+
     // Animation variables
     unsigned int row;
     float moveSpeed;
@@ -33,15 +33,17 @@ private:
 // Métodos
 private:
     void initVariables();
+    void initPlayer();
     void initObjects();
     void gravity();
     void updateInput();
-    void windowsCollision();
     bool playerIsOnPlatform(Entity platform);
 public:
     void update();
+    void windowsCollision();
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void checkCollisionWithObjects(EntityNode *objects);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
+    //Collision getCollision(){ return Collision(shape); }
 };

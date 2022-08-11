@@ -1,5 +1,5 @@
 #include "Game/Entity.hpp"
-#include <iostream>
+
 void Entity::initAttributes(int posX, int posY, float width, float height)
 {
     this->posX = posX;
@@ -12,6 +12,7 @@ void Entity::initShape()
 {
     shape.setPosition(posX, posY);
     shape.setSize(sf::Vector2f(width, height));
+    isOnPlatform = false;
 }
 
 int Entity::getXCord()
@@ -41,13 +42,20 @@ void Entity::updateCords()
 }
 
 void Entity::moveEntity(float x_movement, float y_movement)
-{
+{   
     shape.move(x_movement, y_movement);
 }
 
 void Entity::renderOnGame(sf::RenderTarget *target)
 {
     target->draw(shape);
+}
+
+int Entity::getRandomNumber(int a, int b){
+    srand(time(NULL));
+    int num;
+    num = a+rand()%(b+1-a);
+    return num;
 }
 
 

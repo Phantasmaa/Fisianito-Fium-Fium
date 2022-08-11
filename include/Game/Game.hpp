@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Player.hpp"
+#include "Enemy.hpp"
 #include "Maps.hpp"
 #include "Platform.hpp"
 #include "DataStructures/EntityNode.hpp"
@@ -22,6 +23,7 @@ private:
 
     // Game objects
     Player player;
+    Enemy enemy;
     Platform ground;
     Maps map;
 

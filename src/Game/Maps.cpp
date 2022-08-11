@@ -1,5 +1,7 @@
 #include "Game/Maps.hpp"
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 
 Maps::Maps(){
 
@@ -21,12 +23,13 @@ void Maps::createPlatforms(){
     platforms = new EntityNode();
     EntityNode *head = platforms;
 
-    for(int i = 0; i < 3; i ++){
+    for(int i = 0; i < 4; i ++){
         int addY = 180*i;
         switch(i){
             case 0: widthPlaform = 580.0f; break;
             case 1: widthPlaform = 280.0f; break;
             case 2: widthPlaform = 500.0f; break;
+            case 3: widthPlaform = 1280.0f; break;
         }
         for(int j=0; j<2; j++){
             Platform platform;
