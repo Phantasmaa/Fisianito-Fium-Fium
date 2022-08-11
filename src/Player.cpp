@@ -35,7 +35,7 @@ void Player::initVariables()
 
 void Player::initObjects()
 {  
-    this->animation = new Animation(getWitdh(),getHeight(),4);
+    this->animation = new Animation(getWitdh(),getHeight(),4,1);
     shape.setTextureRect(this->animation->uvRect);
 }
 
@@ -74,18 +74,21 @@ void Player::updateInput()
         faceRight=true;
         isMoving=true;
     }
+    else{
+        isMoving=false;
+    }
     
     shape.move(movement);
     updateCords();
     
 }
 
-void Player::update(sf::Clock clock)
+void Player::update(float dt)
 {
-    //Animacion
-    animation->update(isMoving,faceRight,clock);
-    shape.setTextureRect(this->animation->uvRect);
-
     gravity();
     updateInput();
+
+    //Animacion
+    animation->update(isMoving,faceRight,isJumping,dt);
+    shape.setTextureRect(this->animation->uvRect);
 }

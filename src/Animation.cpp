@@ -1,6 +1,6 @@
 #include "Animation.hpp"
 
-Animation::Animation(int rectWidth,int rectHeight, int numSheet)
+Animation::Animation(int rectWidth,int rectHeight, int numSheet,double switchTime)
 {
     //Rectangulo visible de Shape
     sf::IntRect area(0,0,rectWidth,rectHeight);
@@ -8,6 +8,9 @@ Animation::Animation(int rectWidth,int rectHeight, int numSheet)
     //Cantidad de animaciones en el SpreadSheet
     this->numSheet=numSheet;
     //Frame *animacions[numSheet];
+    //time para la animacion
+    this->totalTime=0;
+    this->switchTime=switchTime;
 
 }
 
@@ -36,25 +39,64 @@ Animation::~Animation() {}
     */
 //}
 
-void Animation::update(bool isMoving, bool faceRight,sf::Clock clock)
-{
-    if (clock.getElapsedTime().asSeconds() >=2.0f){
-        /*if (isMoving)
+void Animation::update(bool isMoving, bool faceRight,bool isJumping, float deltaTime)
+{   
+    totalTime += deltaTime;
+    if (totalTime>=switchTime){
+        totalTime=0;
+        if (isMoving)
         {
-            
+            if (faceRight){
+                this->uvRect.top=50;
+                if (uvRect.left == 300)
+                    this->uvRect.left = 0;
+                else
+                    this->uvRect.left += 50;
+            }
+            else //faceLeft
+            {
+                this->uvRect.top=100;
+                if (uvRect.left == 300)
+                    this->uvRect.left = 150;
+                else
+                    this->uvRect.left += 50;
+            }
+        }
+        else if (isJumping)
+        {
+            if (faceRight){
+                this->uvRect.top=150;
+                if (uvRect.left == 300)
+                    this->uvRect.left = 0;
+                else
+                    this->uvRect.left += 50;
+            }
+            else //faceLeft
+            {
+                this->uvRect.top=200;
+                if (uvRect.left == 300)
+                    this->uvRect.left = 150;
+                else
+                    this->uvRect.left += 50;
+            }
         }
         else{
-            //if (faceRight)
-            //{*/
+            this->uvRect.top=0;
+        
+            if (faceRight){
+            
                 if (uvRect.left == 100)
                     this->uvRect.left = 0;
                 else
                     this->uvRect.left += 50;
-            /*}
-            else
+            }
+            else //faseLeft
             {
-                
-            }*/
-       // }
+                if (uvRect.left == 250)
+                    this->uvRect.left = 150;
+                else
+                    this->uvRect.left += 50;
+            }
+       }
     }
 }

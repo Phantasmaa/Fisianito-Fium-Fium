@@ -5,18 +5,20 @@ int main()
 {
     // Init Game
     Game game;
+    //Variables de tiempo para la animación
     sf::Clock clock;
+   
+    clock.restart();
+
     // Game loop
     while (game.running())
     {
         // Update
-        game.update(clock);
+        game.update(clock.getElapsedTime().asMicroseconds());
         // Render
         game.render();
         //Restart clock
-        if(clock.getElapsedTime().asSeconds()==2.0f){
-            clock.restart();
-        }
+        clock.restart();
     }
 
     return 0;

@@ -10,13 +10,16 @@ private:
 public:
     // Variables
     int numSheet; //cuantas animaciones hay por spriteSheet
+    double switchTime; //second per frame de la animacion
+    double totalTime;
+
     sf::IntRect uvRect; //Rectangulo que contiene lo mostrado
 
     // Constructor-Destructor
-    Animation(int rectWidth,int rectHeight, int numSheet);
+    Animation(int rectWidth,int rectHeight, int numSheet,double switchTime);
     ~Animation();
 
-    void update(bool isMoving, bool faceRight,sf::Clock clock);
+    void update(bool isMoving, bool faceRight,bool isJumping, float deltaTime);
 };
 
 class Frame

@@ -46,7 +46,7 @@ public:
     // Functions
     void gravity();
     void updateInput();
-    void update(sf::Clock clock);
+    void update(float dt);
 
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }

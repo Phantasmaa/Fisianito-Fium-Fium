@@ -41,6 +41,6 @@ public:
 
     // Functions
     void pollEvents();
-    void update(sf::Clock clock);
+    void update(float dt);
     void render();
 };
