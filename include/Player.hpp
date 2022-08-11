@@ -19,13 +19,16 @@ public:
     // Objects
     int animationRow;
     enum animationTop {iddleRow, runR, runL, jumpR, jumpL};
+    enum animationFrame {iddleR, iddleL, runJump, hitR, hitL};
     Animation *animation;
     //Ciclo de animaciones total
-    Frame *iddleR=NULL;
-    Frame *iddleL=NULL;
-    Frame *runAndJump=NULL;
-    Frame *hitHurtR=NULL;
-    Frame *hitHurtL=NULL;
+    Frame *frameCycles[5];
+    void createAnimationCycle();
+    /*Frame *iddleR;
+    Frame *iddleL;
+    Frame *runAndJump;
+    Frame *hitHurtR;
+    Frame *hitHurtL;*/
     //Animacion actual
     Frame *currentCycle;
 
@@ -48,7 +51,6 @@ public:
     virtual ~Player();
 
     // Functions
-    void fillFrames(int numFrames,int startX, int rectWidth, Frame *frames);
     void gravity();
     void updateInput();
     void update(float dt);

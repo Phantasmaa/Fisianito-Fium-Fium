@@ -16,10 +16,14 @@ public:
 
     sf::IntRect uvRect; //Rectangulo que contiene lo mostrado
 
+
+
     // Constructor-Destructor
     Animation(int rectWidth,int rectHeight, int numSheet,float switchTime);
     ~Animation();
     
-    void update(int animationRow, Frame *frames, float deltaTime);
+
+    void update(int animationRow, Frame *frameCycle, float deltaTime);
+    
     
 };

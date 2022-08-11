@@ -39,7 +39,8 @@ void Player::initObjects()
     shape.setTextureRect(this->animation->uvRect);
     
     //creando ciclos de animacion
-    this->fillFrames(3,getWitdh(),0,iddleL);
+    this->createAnimationCycle();
+    //this->fillFrames(3,0,getWitdh(),iddleL);
     /*this->fillFrames(3,getWitdh(),150,iddleR);
     this->fillFrames(7,getWitdh(),0,runAndJump);
     this->fillFrames(2,getWitdh(),0,hitHurtR);
@@ -49,28 +50,6 @@ void Player::initObjects()
 }
 
 // Functions
-void Player::fillFrames(int numFrames,int startX, int rectWidth, Frame *frames)
-{
-    Frame *head=frames;
-    //Iteración para hacer una lista segun la longitud de la animacion de cada ciclo
-    for (int i=0; i < numFrames; i++)
-    {
-        Frame *newFrame=NULL;
-        newFrame->leftX=i*rectWidth + startX;
-
-        //Insertado al Final
-        if(frames==NULL){
-            frames=newFrame;
-            newFrame->nextFrame=frames;
-        }
-        while(head->nextFrame !=NULL){
-            head=head->nextFrame;
-        }
-        head->nextFrame=newFrame;
-        newFrame->nextFrame=frames;
-    }
-}
-
 
 void Player::gravity()
 {
@@ -120,6 +99,7 @@ void Player::update(float dt)
     updateInput();
 
     //Animacion
+    getAction();
     animation->update(animationRow,currentCycle,dt);
     shape.setTextureRect(this->animation->uvRect);
 }
@@ -132,7 +112,7 @@ void Player:: getAction()
             animationRow=runR;
         }
         else animationRow=runL;
-        currentCycle=runAndJump;
+        currentCycle=frameCycles[runJump];
     }
 
     else if(isJumping){
@@ -142,14 +122,76 @@ void Player:: getAction()
         }
         else animationRow=jumpL;
 
-        currentCycle=runAndJump;
+        currentCycle=frameCycles[runJump];
     }
 
     else{
         animationRow=iddleRow;
         if(faceRight){
-            currentCycle=iddleR;
+            currentCycle=frameCycles[iddleR];
         }
-        else currentCycle=iddleL;
+        else currentCycle=frameCycles[iddleL];
     }
 }
+
+void Player::createAnimationCycle(){
+    int numFrames;
+    int startX;
+    for(int i=0; i<5;i++){
+
+        if(i<=1){
+            numFrames=3;
+        }
+        else numFrames=7;
+        
+        if(animationRow==0 && i==1) startX=150;
+        else startX=0;
+
+        this->frameCycles[i]=new Frame();
+        Frame *head =this->frameCycles[i];
+
+        for(int j=0;j<numFrames;j++){
+
+            Frame frame;
+            frame.leftX=j*getWitdh() + startX;
+            head->leftX=frame.leftX;
+            head->nextFrame=new Frame();
+            head=head->nextFrame;
+        }
+        //Insertado al Final
+        if(frameCycles[i]==NULL){
+            frameCycles[i]=head;
+            head->nextFrame=frameCycles[i];
+        }
+        while(head->nextFrame !=NULL){
+            head=head->nextFrame;
+        }
+        head->nextFrame=head;
+        frameCycles[i]=head;
+
+    }
+}
+
+/*void Player::initFrames()
+{
+    for(int i=0; i<5;i++){
+    Frame *head = frameCycles[i];
+    //Iteración para hacer una lista segun la longitud de la animacion de cada ciclo
+    for (int i=0; i < numFrames; i++)
+    {
+        Frame *newFrame=NULL;
+        newFrame->leftX=i*rectWidth + startX;
+
+        //Insertado al Final
+        if(frames==NULL){
+            frames=newFrame;
+            newFrame->nextFrame=frames;
+        }
+        while(head->nextFrame !=NULL){
+            head=head->nextFrame;
+        }
+        head->nextFrame=newFrame;
+        newFrame->nextFrame=frames;
+    }
+    }
+}*/

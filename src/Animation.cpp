@@ -17,13 +17,13 @@ Animation::Animation(int rectWidth,int rectHeight, int numSheet,float switchTime
 Animation::~Animation() {}
 
 
-void Animation::update(int animationRow, Frame *frames, float deltaTime)
+void Animation::update(int animationRow, Frame *frameCycle, float deltaTime)
 {   
     totalTime += deltaTime;
     if (totalTime>=switchTime){
         totalTime-=switchTime;
         this->uvRect.top=animationRow*50;
-        this->uvRect.left=frames->leftX;
-        frames=frames->nextFrame;
+        frameCycle=frameCycle->nextFrame;
+        this->uvRect.left=frameCycle->leftX;
     }
 }
