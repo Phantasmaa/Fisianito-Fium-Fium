@@ -19,9 +19,6 @@ void Player::initVariables()
 {
     // Position
     groundHeight = 620;
-    roofHeight = 300;
-    // Dimensions
-    this->initAttributes(20, groundHeight, 50.f, 50.f);
     // Speed
     moveSpeed = 80.f;
     gravitySpeed = 1.0f;
@@ -36,7 +33,6 @@ void Player::initVariables()
 void Player::initPlayer()
 {
     this->initAttributes(20, groundHeight, 50.f, 50.f);
-    this->shape.setOrigin(shape.getSize() / 2.0f);
     this->shape.setFillColor(sf::Color::Green);
 }
 
@@ -71,8 +67,6 @@ void Player::updateInput()
     float velocityY = 0.0f;
     // Keyboard inputs
     handleKeyPressed(velocityY, movement, deltaTime);
-    animation->update(row, deltaTime, faceRight);
-    shape.setTextureRect(this->animation->uvRect);
     velocityY = fabs(velocityY);
 
     if (movementDirection == Directions::Up)
@@ -80,8 +74,7 @@ void Player::updateInput()
 
     velocityY += accelerationY;
     movement.y = velocityY;
-    shape.move(movement);
-    updateCords();
+    moveEntity(movement.x,movement.y);
 }
 
 void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime)
@@ -101,23 +94,6 @@ void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float de
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
         movement.x += moveSpeed * deltaTime;
-    }
-
-    if (movement.x == 0.0f)
-    {
-        row = 0;
-    }
-    else
-    {
-        row = 1;
-        if (movement.x > 0.0f)
-        {
-            faceRight = true;
-        }
-        else
-        {
-            faceRight = false;
-        }
     }
 }
 

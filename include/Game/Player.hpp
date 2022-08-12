@@ -29,18 +29,16 @@ private:
     // Objects
     GameTextures texture;
     Animation *animation;
-    // Gravity Variables
+    // Gravity & Movement Variables
     int groundHeight;
-    int roofHeight;
+    float moveSpeed;
     float gravitySpeed;
     float jumpSpeed;
     float accelerationY;
     bool isOnPlatform;
-    bool hasJumped;
     JumpStatus jumpStatus;
     // Animation variables
     unsigned int row;
-    float moveSpeed;
     bool faceRight;
 
     // Métodos
@@ -59,6 +57,4 @@ public:
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
-    // other functions
-    sf::Vector2f getPosition() { return shape.getPosition(); }
 };

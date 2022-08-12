@@ -27,9 +27,9 @@ void Maps::createPlatforms(){
         int addY = 180*i;
         switch(i){
             case 0: widthPlaform = 580.0f; break;
-            case 1: widthPlaform = 280.0f; break;
+            case 1: widthPlaform = 200.0f; break;
             case 2: widthPlaform = 500.0f; break;
-            case 3: widthPlaform = 1280.0f; break;
+            case 3: widthPlaform = 1280.0f; heightPlatform = 100.0f; addY=520; break;
         }
         for(int j=0; j<2; j++){
             Platform platform;
@@ -42,7 +42,7 @@ void Maps::createPlatforms(){
             
             if(i==1 && j==1){
                 Platform centerPlatform;
-                widthPlaform = 400.0f;
+                widthPlaform = 350.0f;
                 centerPlatform.initAttributes((screenWidth-widthPlaform)/2,baseY+180,widthPlaform,heightPlatform+20.0f);
 
                 head->value = centerPlatform;

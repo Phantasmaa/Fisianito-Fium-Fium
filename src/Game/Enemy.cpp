@@ -43,14 +43,8 @@ void Enemy::moveEnemy()
         movement.y += fallSpeed * deltatime;
     }
 
-    if (shape.getPosition().y + shape.getGlobalBounds().height > 670)
-    {
-        movement.y = 0;
-    }
-
     movement.x += moveSpeed * deltatime;
-    shape.move(movement);
-    this->updateCords();
+    moveEntity(movement.x,movement.y);
 }
 
 void Enemy::initObjects()
