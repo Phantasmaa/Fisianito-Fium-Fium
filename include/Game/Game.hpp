@@ -4,6 +4,7 @@
 #include "Platform.hpp"
 #include "Enemy.hpp"
 #include "Maps.hpp"
+#include "EnemyEngine.hpp"
 #include "DataStructures/EntityNode.hpp"
 /*Game engine class*/
 
@@ -24,6 +25,7 @@ private:
     // Game objects
     Player player;
     Enemy enemy;
+    EnemyEngine enemyAux;
     Platform ground;
     Maps map;
 

@@ -15,6 +15,20 @@ void Platform::initVariables()
 {
 }
 
+void Platform::movePlatform(){
+    float deltatime = 0.07f;
+    float moveSpeed = 30.0f;
+    sf::Vector2f movement(0.0f, 0.0f);
+
+    if (this->shape.getPosition().x < 250 || this->shape.getPosition().x + this->shape.getGlobalBounds().width > 850)
+    {
+        moveSpeed *= -1;
+    }
+
+    movement.x += moveSpeed * deltatime;
+    this->moveEntity(movement.x,movement.y);
+}
+
 /*
 void Platform::initShape()
 {
@@ -24,6 +38,7 @@ void Platform::initShape()
 }
 */
 void Platform::update()
-{
+{   
+    movePlatform();
     // Windows collision
 }

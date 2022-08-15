@@ -33,9 +33,10 @@ void Game::initWindow()
 void Game::initEntitys()
 {
     player.initShape();
-    enemy.initShape();
+    //enemy.initShape();
     map.initPlatforms();
     map.initObjects();
+    enemyAux.initEnemies();
 }
 
 // Access
@@ -75,9 +76,11 @@ void Game::update()
 {
     pollEvents();
     player.update(map.platforms);
-    enemy.update();
-    enemy.checkCollisionWithPlatforms(map.platforms);
+    //enemy.update();
+    enemyAux.update();
+    //enemy.checkCollisionWithPlatforms(map.platforms);
     player.checkCollisionWithObjects(map.objects);
+    enemyAux.checkCollisionWithPlatforms(map.platforms);
 }
 
 void Game::render()
@@ -87,6 +90,7 @@ void Game::render()
     player.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
-    enemy.renderOnGame(this->window);
+    //enemy.renderOnGame(this->window);
+    enemyAux.renderEnemies(this->window);
     window->display();
 }

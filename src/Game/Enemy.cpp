@@ -24,7 +24,8 @@ void Enemy::initVariables()
 void Enemy::initEnemy()
 {
     this->initAttributes(0, groundHeight, 50.f, 50.f);
-    this->shape.setFillColor(sf::Color::Blue);
+    //this->shape.setFillColor(sf::Color::Blue);
+    
 }
 
 void Enemy::moveEnemy()
@@ -93,7 +94,7 @@ bool Enemy::playerIsOnPlatform(Entity platform)
     Si la coordenada Y de player es platform.y - 50
     y la coordenada X de player está entre platform.X y platform.X + platform.width
     entonces player está sobre platform
-    */
+    */    
     int minusLimitOnX = platform.getXCord() - width;
     int superiorLimitOnX = platform.getXCord() + platform.getWitdh();
     int limitOnY = platform.getYCord() - this->height;

@@ -9,6 +9,8 @@
 
 class Enemy : public Entity
 {
+
+
 public:
     // Constructor-Destructor
     Enemy();

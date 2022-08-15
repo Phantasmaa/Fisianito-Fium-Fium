@@ -33,7 +33,7 @@ void Player::initVariables()
 void Player::initPlayer()
 {
     this->initAttributes(20, groundHeight, 50.f, 50.f);
-    this->shape.setFillColor(sf::Color::Green);
+    //this->shape.setFillColor(sf::Color::Green);
 }
 
 void Player::initObjects()

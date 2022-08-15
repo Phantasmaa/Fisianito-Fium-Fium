@@ -17,6 +17,7 @@ public:
     virtual ~Platform();
 
     // Functions
+    void movePlatform();
     void update();
 
     // Collision functions
