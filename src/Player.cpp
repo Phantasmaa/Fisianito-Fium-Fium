@@ -136,7 +136,8 @@ void Player::update(float dt)
     animation->update(animationRow,currentCycle,dt);
     shape.setTextureRect(this->animation->uvRect);
 }
-
+//HACIENDO CIRCULOS
+//CIRCULOS, CIRCULARE SDIOS________________________________________________________________________________ayuda
 void Player::createAnimationCycle(){
     int numFrames;
     int startX;
@@ -150,21 +151,23 @@ void Player::createAnimationCycle(){
         if(i==1 || i==4) startX=150;
         else startX=0;
 
+        //Crea la lista circular a utilizar
         frameCycles[i]=new Frame();
+        frameCycles[i]->nextFrame=frameCycles[i];
         Frame *head=frameCycles[i];
+        //head->nextFrame=head;
 
         for(int j=0;j<numFrames;j++){
-
-            Frame frame;
-            frame.leftX=j*50 +startX;
-            head->leftX=frame.leftX;
+            Frame frame; //nuevo frame a ingresar
+            frame.leftX=j*50 +startX;//se designa las coordenadas
+            head->leftX=frame.leftX; //se coloca el valor en la lista
             frameCycles[i]=head;
             std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->leftX;
             frameCycles[i]=frameCycles[i]->nextFrame;
             
-            head->nextFrame=head;
-            if(head->nextFrame==NULL)
+            if(head->nextFrame!=NULL)
             {
+                head->nextFrame=head;
                 head=head->nextFrame;
             }
         }
