@@ -33,7 +33,7 @@ void Game::initWindow()
 void Game::initEntitys()
 {
     player.initShape();
-    // initPlatforms();
+    enemy.initShape();
     map.initPlatforms();
     map.initObjects();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
