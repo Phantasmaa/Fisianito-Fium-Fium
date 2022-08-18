@@ -65,6 +65,8 @@ void Game::pollEvents()
 
         case sf::Event::KeyReleased:
         {
+            if (ev.key.code == sf::Keyboard::F)
+                player.shotBullet();
             player.movementDirection = Directions::Down;
             player.isJumping = false;
             break;
@@ -87,6 +89,7 @@ void Game::render()
     window->clear();
     //   Draw game objects
     player.renderOnGame(this->window);
+    player.renderBullets(this->window);
     ground.renderOnGame(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);

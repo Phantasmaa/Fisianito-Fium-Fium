@@ -31,6 +31,10 @@ void Player::initVariables()
     // Status
     isJumping = false;
     isOnPlatform = false;
+    // Bullets
+    bullets = nullptr;
+
+    faceDirection = Directions::Right;
 }
 
 void Player::initPlayer()
@@ -96,10 +100,12 @@ void Player::handleKeyPressed(float &velocityY, sf::Vector2f &movement, float de
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
+        faceDirection = Directions::Left;
         movement.x -= moveSpeed * deltaTime;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
+        faceDirection = Directions::Right;
         movement.x += moveSpeed * deltaTime;
     }
 
@@ -127,7 +133,6 @@ void Player::update(EntityNode *platforms)
     checkCollisionWithPlatforms(platforms);
     gravity();
     windowsCollision();
-    // logEntity();
 }
 
 // Collision Player
@@ -196,13 +201,42 @@ void Player::checkCollisionWithObjects(EntityNode *objects)
         head = head->next_node;
     }
 }
-inline bool epsilonEquals(const float x, const float y, const float epsilon = 1E-5f)
-{
-
-    return fabs(x - y) <= epsilon;
-}
 
 bool Player::isOnFloor()
 {
     return getYCord() == groundHeight;
+}
+
+void Player::shotBullet()
+{
+    std::cout << "Fire on the hole\n";
+    float bulletYPos = posY + posY / 3;
+    float bulletXPos = posX + width + 10;
+    Bullet newBullet(bulletXPos, bulletYPos, faceDirection);
+    if (!bullets)
+    {
+        std::cout << "Creating bullets list\n";
+        bullets = new EntityNode();
+        bullets->value = newBullet;
+        return;
+    }
+    EntityNode *head = bullets;
+    while (head->next_node)
+    {
+        head = head->next_node;
+    }
+    head->next_node = new EntityNode();
+    head->next_node->value = newBullet;
+    std::cout << "Creating new bullet with cords: ";
+    head->next_node->value.logEntity();
+}
+
+void Player::renderBullets(sf::RenderTarget *target)
+{
+    EntityNode *head = bullets;
+    while (head)
+    {
+        head->value.renderOnGame(target);
+        head = head->next_node;
+    }
 }

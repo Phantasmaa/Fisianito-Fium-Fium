@@ -14,7 +14,6 @@ enum Directions
     Left,
     Right,
     Static
-
 };
 class Entity
 {

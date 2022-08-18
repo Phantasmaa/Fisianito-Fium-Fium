@@ -6,7 +6,7 @@
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "DataStructures/EntityNode.hpp"
-
+#include "Bullet.hpp"
 enum JumpStatus
 {
     Neutral,
@@ -29,6 +29,8 @@ private:
     // Objects
     GameTextures texture;
     Animation *animation;
+    EntityNode *bullets;
+
     // Gravity Variables
     int groundHeight;
     int roofHeight;
@@ -38,10 +40,13 @@ private:
     bool isOnPlatform;
     bool hasJumped;
     JumpStatus jumpStatus;
+
     // Animation variables
     unsigned int row;
     float moveSpeed;
     bool faceRight;
+
+    Directions faceDirection;
 
     // Métodos
 private:
@@ -52,13 +57,16 @@ private:
     void updateInput();
     void handleKeyPressed(float &velocityY, sf::Vector2f &movement, float deltaTime);
     bool isOnFloor();
+    void updateBullets();
 
 public:
     void handleJump();
+    void shotBullet();
     void update(EntityNode *platforms);
     void checkCollisionWithPlatforms(EntityNode *platforms);
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
+    void renderBullets(sf::RenderTarget *target);
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
 };

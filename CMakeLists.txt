@@ -16,6 +16,7 @@ find_package(SFML
 include_directories(include)
 add_executable(fisianito
   include/Game/Animation.hpp
+  include/Game/Bullet.hpp
   include/Game/Collision.hpp
   include/Game/Enemy.hpp
   include/Game/Entity.hpp
@@ -26,6 +27,7 @@ add_executable(fisianito
   include/Game/Player.hpp
   include/DataStructures/EntityNode.hpp
   src/Game/Animation.cpp
+  src/Game/Bullet.cpp
   src/Game/Collision.cpp
   src/Game/Enemy.cpp
   src/Game/Entity.cpp

@@ -26,7 +26,6 @@ private:
     Enemy enemy;
     Platform ground;
     Maps map;
-
     // Private functions
     void initVariables();
     void initWindow();
