@@ -97,5 +97,6 @@ void Game::render()
     platform1.renderOnGame(this->window);
     platform2.renderOnGame(this->window);
     platform3.renderOnGame(this->window);
+    bulletVec.renderOnGame(this->window);
     window->display();
 }

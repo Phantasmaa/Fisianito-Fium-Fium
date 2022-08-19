@@ -6,6 +6,7 @@
 #include "GameTextures.hpp"
 #include "Entity.hpp"
 #include "Enemy.hpp"
+#include "Bullet.hpp"
 
 class Player : public Entity
 {
@@ -27,6 +28,7 @@ public:
     float gravitySpeed;
     bool isJumping;
     bool isOnPlatform;
+    bool isFiring;
 
     // Animation variables
     unsigned int row;

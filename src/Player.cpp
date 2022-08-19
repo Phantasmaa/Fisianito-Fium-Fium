@@ -69,6 +69,22 @@ void Player::updateInput()
     {
         movement.x += moveSpeed * deltaTime;
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z)) {
+                isFiring = true;
+            }
+    
+    if (isFiring == true) {
+            Bullet newBullet(sf::Vector2f(50, 5));
+            newBullet.setPos(sf::Vector2f( Player.getXCord(), player.getYCord()));
+            bulletVec.push_back(newBullet);
+            isFiring = false;
+        }
+ 
+        for (int i = 0; i < bulletVec.size(); i++) {
+            bulletVec[i].fire(3);
+        }
+
+
 
     if (movement.x == 0.0f)
     {

@@ -27,6 +27,7 @@ add_executable(fisianito
   include/GameTextures.hpp
   include/Platform.hpp
   include/Player.hpp
+  include/Entity.hpp
   include/Enemy.hpp
   src/Animation.cpp
   src/Collision.cpp
