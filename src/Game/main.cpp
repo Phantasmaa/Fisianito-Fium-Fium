@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include <SFML/Graphics.hpp>
 #include "Game/Game.hpp"
 
@@ -10,6 +12,7 @@ int main()
     sf::Clock clock;
     float accumulator = 0;
     const float timestep = 1.0f / 60.0f; // 60hz update frequency
+    srand(time(NULL));
     // Game loop
     while (game.running())
     {

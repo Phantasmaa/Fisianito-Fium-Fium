@@ -5,7 +5,6 @@ Enemy::Enemy()
 {
     this->initVariables();
     this->initEnemy();
-    this->initObjects();
 }
 
 Enemy::~Enemy() {}
@@ -14,6 +13,8 @@ Enemy::~Enemy() {}
 void Enemy::initVariables()
 {
     // Position
+    initPosX = getRandomNumber(0,1230);
+    initPosY = 0 - shape.getGlobalBounds().width;
     groundHeight = 100.0f;
     // Speed
     moveSpeed = 50.f;
@@ -23,8 +24,7 @@ void Enemy::initVariables()
 
 void Enemy::initEnemy()
 {
-    this->initAttributes(0, groundHeight, 50.f, 50.f);
-    //this->shape.setFillColor(sf::Color::Blue);
+    this->initAttributes(initPosX,initPosY, 50.f, 50.f);
     
 }
 
@@ -46,10 +46,6 @@ void Enemy::moveEnemy()
 
     movement.x += moveSpeed * deltatime;
     moveEntity(movement.x,movement.y);
-}
-
-void Enemy::initObjects()
-{
 }
 
 void Enemy::gravity()
@@ -75,9 +71,9 @@ void Enemy::checkCollisionWithPlatforms(EntityNode *platforms)
         if (playerIsOnPlatform(head->value))
         {
             isOnPlatform = true;
-            shape.setFillColor(sf::Color::Cyan);
             return;
         }
+        shape.setFillColor(sf::Color::Cyan);
         head = head->next_node;
     }
     isOnPlatform = false;

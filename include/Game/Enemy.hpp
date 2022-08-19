@@ -25,6 +25,8 @@ public:
     GameTextures texture;
 
     // Gravity & Speed Variables
+    float initPosX;
+    float initPosY;
     int groundHeight;
     bool isJumping;
     float gravitySpeed;

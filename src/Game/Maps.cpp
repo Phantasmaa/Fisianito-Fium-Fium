@@ -1,7 +1,7 @@
 #include "Game/Maps.hpp"
 #include <iostream>
 #include <stdlib.h>
-#include <time.h>
+#include <ctime>
 
 Maps::Maps(){
 
