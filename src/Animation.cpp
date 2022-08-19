@@ -1,4 +1,5 @@
 #include "Animation.hpp"
+#include <iostream>
 
 Animation::Animation(int rectWidth,int rectHeight, int numSheet,float switchTime)
 {
@@ -17,13 +18,18 @@ Animation::Animation(int rectWidth,int rectHeight, int numSheet,float switchTime
 Animation::~Animation() {}
 
 
-void Animation::update(int animationRow, Frame *&frameCycle, float deltaTime)
+void Animation::update(int animationRow, Frame *frameCycle, float deltaTime)
 {   
     totalTime += deltaTime;
     if (totalTime>=switchTime){
+
+        std::cout<<"\nCiclo actual :"<<frameCycle->leftX;
+
         totalTime-=switchTime;
         this->uvRect.top=animationRow*50;
-        frameCycle=frameCycle->nextFrame;
+        frameCycle=frameCycle->nextFrame; //cambio de frame
         this->uvRect.left=frameCycle->leftX;
+
+        std::cout<<"\nCiclo actual :"<<frameCycle->leftX;
     }
 }

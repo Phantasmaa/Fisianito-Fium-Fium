@@ -41,12 +41,7 @@ void Player::initObjects()
     
     //creando ciclos de animacion
     this->createAnimationCycle();
-    //this->fillFrames(3,0,getWitdh(),iddleL);
-    /*this->fillFrames(3,getWitdh(),150,iddleR);
-    this->fillFrames(7,getWitdh(),0,runAndJump);
-    this->fillFrames(2,getWitdh(),0,hitHurtR);
-    this->fillFrames(2,getWitdh(),100,hitHurtL);*/
-    
+
 
 }
 
@@ -103,7 +98,7 @@ void Player:: getAction()
             animationRow=runR;
         }
         else animationRow=runL;
-        currentCycle=frameCycles[runJump];
+        currentCycle=runJump;
     }
 
     else if(isJumping){
@@ -113,14 +108,14 @@ void Player:: getAction()
         }
         else animationRow=jumpL;
 
-        currentCycle=frameCycles[runJump];
+        currentCycle=runJump;
     }
 
     else{
         if(faceRight){
-            currentCycle=frameCycles[iddleR];
+            currentCycle=iddleR;
         }
-        else currentCycle=frameCycles[iddleL];
+        else currentCycle=iddleL;
 
         animationRow=iddleRow;
     }
@@ -133,12 +128,55 @@ void Player::update(float dt)
     
     //Animacion
     //std::cout<<"\nEje X:"<<this->animation->uvRect.width;
-    animation->update(animationRow,currentCycle,dt);
+    animation->update(animationRow,frameCycles[currentCycle],dt);
     shape.setTextureRect(this->animation->uvRect);
 }
-//HACIENDO CIRCULOS
-//CIRCULOS, CIRCULARE SDIOS________________________________________________________________________________ayuda
-void Player::createAnimationCycle(){
+
+
+//INCERTAR EN LISTA CIRCULARES
+void Player::createAnimationCycle()
+{
+    int numFrames;
+    int startX;
+
+    for(int frameCount=0; frameCount<5;frameCount++){
+
+        if(frameCount!=2){
+            numFrames=3;
+        }
+        else numFrames=7;
+
+        if(frameCount==1 || frameCount==4)startX=150;
+        else startX=0;
+
+        // Crea la lista circular a utilizar
+        // Primer frame
+        frameCycles[frameCount] = new Frame();
+        frameCycles[frameCount]->leftX = startX;
+        frameCycles[frameCount]->nextFrame=frameCycles[frameCount];
+
+        // Copias para recorrer... por donde recorres? ლ(ಠ_ಠ ლ)
+        Frame *head=frameCycles[frameCount]; // Cabeza del ciclo
+        
+        // Llenando los frames segun numFrames
+        for (int j = 1; j < numFrames; j++)
+        {
+            head = frameCycles[frameCount];
+            head = head->nextFrame;
+            Frame *temp = new Frame();
+            temp->leftX = j*50 + startX;        // se coloca el valor
+            temp->nextFrame=head->nextFrame;    //iguala al siguiente de la lista
+            head->nextFrame=temp;               //se incerta el nuevo en la cabecera
+
+            frameCycles[frameCount]=head;
+            
+        
+        }
+
+    }
+}
+
+/*void Player::createAnimationCycle(){
     int numFrames;
     int startX;
     for(int i=0; i<5;i++){
@@ -152,17 +190,14 @@ void Player::createAnimationCycle(){
         else startX=0;
 
         //Crea la lista circular a utilizar
-        frameCycles[i]=new Frame();
-        frameCycles[i]->nextFrame=frameCycles[i];
-        Frame *head=frameCycles[i];
+        frameCycles[i]=NULL;
+        Frame *head=new Frame();
         //head->nextFrame=head;
 
         for(int j=0;j<numFrames;j++){
-            Frame frame; //nuevo frame a ingresar
-            frame.leftX=j*50 +startX;//se designa las coordenadas
-            head->leftX=frame.leftX; //se coloca el valor en la lista
+            head->leftX=j*50 +startX;//se designa las coordenadas
             frameCycles[i]=head;
-            std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->leftX;
+            
             frameCycles[i]=frameCycles[i]->nextFrame;
             
             if(head->nextFrame!=NULL)
@@ -173,6 +208,10 @@ void Player::createAnimationCycle(){
         }
         head->nextFrame=frameCycles[i];
         frameCycles[i]->nextFrame=head;
+        //VERIFICANDO
+        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->leftX;
         std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->nextFrame->leftX;
+        std::cout<<"\nCiclo"<<i<<": "<<frameCycles[i]->nextFrame->nextFrame->nextFrame->leftX;
     }
-}
+}*/

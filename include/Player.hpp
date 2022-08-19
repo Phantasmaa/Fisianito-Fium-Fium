@@ -22,9 +22,9 @@ public:
     enum animationFrame {iddleR, iddleL, runJump, hitR, hitL};
     Animation *animation;
     //Animacion actual
-    Frame *currentCycle;
+    int currentCycle;
     //Ciclo de animaciones total
-    Frame *frameCycles[4];
+    Frame **frameCycles=new Frame*[5];
     void createAnimationCycle();
  
 

@@ -22,7 +22,7 @@ public:
     Animation(int rectWidth,int rectHeight, int numSheet,float switchTime);
     ~Animation();
 
-    void update(int animationRow, Frame *&frameCycle, float deltaTime);
+    void update(int animationRow, Frame *frameCycle, float deltaTime);
     
     
 };
