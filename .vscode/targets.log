@@ -1,0 +1,462 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Mon Aug 22 01:46:23 2022
+
+# Variables
+
+# environment
+GDK_BACKEND = x11
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 5)
+SRC := src/Game
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+SSH_AGENT_LAUNCHER = gnome-keyring
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
+VSCODE_CWD = /home/manuel
+# environment
+ 
+WINDOWPATH = 2
+# default
+MAKE_COMMAND := make
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/103/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/manuel/Documentos/proyecto
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/manuel/.config/Code/CachedData/da76f93349a72022ca4670c1b84860304616aaa2
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/manuel/Documentos/proyecto
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# environment
+SNAP_REEXEC = 
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 2653
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+SESSION_MANAGER = local/manuel-MS-7C39:@/tmp/.ICE-unix/1627,unix/manuel-MS-7C39:/tmp/.ICE-unix/1627
+# automatic
+*F = $(notdir $*)
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# makefile (from 'Makefile', line 8)
+LIB := lib
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"es","availableLanguages":{"*":"es"},"_languagePackId":"9336b18a2694f1b71e2417b4e335df52.es","_translationsConfigFile":"/home/manuel/.config/Code/clp/9336b18a2694f1b71e2417b4e335df52.es/tcf.json","_cacheRoot":"/home/manuel/.config/Code/clp/9336b18a2694f1b71e2417b4e335df52.es","_resolvedLanguagePackCoreLocation":"/home/manuel/.config/Code/clp/9336b18a2694f1b71e2417b4e335df52.es/da76f93349a72022ca4670c1b84860304616aaa2","_corruptedFile":"/home/manuel/.config/Code/clp/9336b18a2694f1b71e2417b4e335df52.es/corrupted.info","_languagePackSupport":true}
+# makefile (from 'Makefile', line 6)
+INCLUDE := include
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+SNAP_COOKIE = osuVJIeIOxgl1evqdUVsqmVhpie3XNJOt9i1SnJH87ceWr9hg6if
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+# default
+MAKEFILES := 
+# environment
+LANGUAGE = es_PE:es
+# automatic
+^F = $(notdir $^)
+# environment
+SNAP_USER_COMMON = /home/manuel/snap/code/common
+# environment
+SNAP = /snap/code/103
+# environment
+INVOCATION_ID = f7c34e7e2d7d45cbac56de834c026f13
+# environment
+SNAP_REVISION = 103
+# environment
+SNAP_REAL_HOME = /home/manuel
+# environment
+USERNAME = manuel
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# automatic
+?F = $(notdir $?)
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# environment
+LS_COLORS = 
+# automatic
++F = $(notdir $+)
+# environment
+DESKTOP_SESSION = ubuntu
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = manuel
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+SNAP_ARCH = amd64
+# makefile
+.DEFAULT_GOAL := all
+# environment
+SYSTEMD_EXEC_PID = 1653
+# environment
+DISPLAY = :0
+# environment
+USER = manuel
+# environment
+GTK_MODULES = gail:atk-bridge
+# default
+MAKE_VERSION := 4.3
+# environment
+DISABLE_WAYLAND = 1
+# environment
+SNAP_DATA = /var/snap/code/103
+# environment
+SNAP_CONTEXT = osuVJIeIOxgl1evqdUVsqmVhpie3XNJOt9i1SnJH87ceWr9hg6if
+# environment
+MANAGERPID = 993
+# makefile (from 'Makefile', line 11)
+EXECUTABLE := main
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 2576
+# makefile (from 'Makefile', line 2)
+CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
+# environment
+_ = /snap/code/103/usr/share/code/code
+# makefile (from 'Makefile', line 4)
+BIN := bin
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/manuel/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+JOURNAL_STREAM = 8:29471
+# environment
+XDG_SESSION_CLASS = user
+# makefile (from 'Makefile', line 10)
+LIBRARIES := -lsfml-graphics -lsfml-window -lsfml-system
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/manuel
+# environment
+QT_IM_MODULE = ibus
+# environment
+ 
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-1f648071-1.70.0-main.sock
+# environment
+SNAP_NAME = code
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/103/usr/share/glib-2.0/schemas
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# environment
+SNAP_VERSION = da76f933
+# default
+SUFFIXES := 
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SNAP_COMMON = /var/snap/code/common
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 1)
+CXX := g++
+# environment
+SNAP_USER_DATA = /home/manuel/snap/code/103
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+GDMSESSION = ubuntu
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# variable set hash-table stats:
+# Load=124/1024=12%, Rehash=0, Collisions=7/167=4%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# src/Game (device 2067, inode 3670194): 15 files, no impossibilities.
+# . (device 2067, inode 3670038): 9 files, no impossibilities.
+
+# 24 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+src/Game/Platform.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.155793881
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/Animation.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.151793999
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/EnemyManager.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.151793999
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:57:10.228300453
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/Entity.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 01:06:13.937070752
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/Game.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 01:46:23.691599278
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:25.603141566
+#  File has been updated.
+#  Successfully updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 24):
+	-rm $(BIN)/*
+
+# Not a target:
+src/Game/Bullets.cpp:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-08-22 00:55:03.151793999
+#  File has been updated.
+#  Successfully updated.
+
+bin/main: src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/main.cpp
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  Last modified 2022-08-22 01:40:54.948674231
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := bin/main
+# automatic
+# * := 
+# automatic
+# < := src/Game/Animation.cpp
+# automatic
+# + := src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/main.cpp
+# automatic
+# % := 
+# automatic
+# ^ := src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/main.cpp
+# automatic
+# ? := src/Game/Game.cpp
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=6/18=33%
+#  recipe to execute (from 'Makefile', line 21):
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+
+# Not a target:
+src/Game/Maps.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 01:40:13.345199607
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: bin/main
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+
+# Not a target:
+src/Game/Enemy.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.151793999
+#  File has been updated.
+#  Successfully updated.
+
+run: clean all
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 17):
+	clear
+	./$(BIN)/$(EXECUTABLE)
+
+# Not a target:
+src/Game/Bullet.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.151793999
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/Player.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 01:30:49.204364665
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/GameTextures.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 00:55:03.155793881
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/Game/Collision.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-22 01:27:57.81056688
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=20/1024=2%, Rehash=0, Collisions=0/50=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 44 / storage = 563 B / avg = 12 B
+# current buf: size = 8162 B / used = 563 B / count = 44 / avg = 12 B
+
+# strcache performance: lookups = 59 / hit rate = 25%
+# hash-table stats:
+# Load=44/8192=1%, Rehash=0, Collisions=1/59=2%
+# Finished Make data base on Mon Aug 22 01:46:23 2022
+
+ 
