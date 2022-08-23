@@ -35,7 +35,7 @@ void Game::initEntitys()
     map.initPlatforms();
     map.initObjects();
     map.initBackground();
-    map.initCoins();
+    map.initHeart();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
 }
@@ -87,7 +87,7 @@ void Game::update(float dt)
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
-        player.checkCollisionWithCoins(map.coins,&points);
+        player.checkCollisionWithHeart(map.heart,&points);
         
     }
     else{
@@ -112,7 +112,7 @@ void Game::render()
     map.renderBackground(this->window);
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
-    map.renderCoins(this->window);//monedas
+    map.renderHeart(this->window);//monedas
     if (player.isAlive)
     {
         player.renderOnGame(this->window);

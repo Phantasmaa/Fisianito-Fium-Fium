@@ -99,7 +99,7 @@ public:
     void checkCollisionWithObjects(EntityNode *objects);
     void changeColorWhenCollideWithEnemy();
     void checkCollisionWithTeleport(EntityNode* coins);
-    void checkCollisionWithCoins(EntityNode* coins,Score* points);
+    void checkCollisionWithHeart(EntityNode* coins,Score* points);
 
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }

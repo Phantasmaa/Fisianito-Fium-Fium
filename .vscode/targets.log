@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Aug 22 19:19:10 2022
+# Make data base, printed on Mon Aug 22 22:35:49 2022
 
 # Variables
 
@@ -20,7 +20,6 @@ SRC := src/Game
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
 SSH_AGENT_LAUNCHER = gnome-keyring
- 
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
@@ -92,7 +91,7 @@ SNAP_REEXEC =
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 17745
+VSCODE_PID = 41912
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -200,7 +199,7 @@ MANAGERPID = 987
 # makefile (from 'Makefile', line 11)
 EXECUTABLE := main
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 17694
+GIO_LAUNCHED_DESKTOP_FILE_PID = 41862
 # makefile (from 'Makefile', line 2)
 CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
 # environment
@@ -260,8 +259,7 @@ GDMSESSION = ubuntu
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # variable set hash-table stats:
- 
-# Load=124/1024=12%, Rehash=0, Collisions=7/167=4%
+# Load=124/1024=12%, Rehash=0, Collisions=6/159=4%
 
 # Pattern-specific Variable Values
 
@@ -270,9 +268,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 # Directories
 
 # src/Game (device 2067, inode 3017958): 16 files, no impossibilities.
-# . (device 2067, inode 2624338): 9 files, no impossibilities.
+# . (device 2067, inode 2624338): 11 files, no impossibilities.
 
-# 25 files, no impossibilities in 2 directories.
+# 27 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -280,6 +278,7 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Files
 
+ 
 # Not a target:
 src/Game/Platform.cpp:
 #  Implicit rule search has been done.
@@ -297,7 +296,7 @@ src/Game/Animation.cpp:
 # Not a target:
 src/Game/EnemyManager.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 19:06:12.239579423
+#  Last modified 2022-08-22 19:23:02.955179785
 #  File has been updated.
 #  Successfully updated.
 
@@ -318,7 +317,7 @@ src/Game/Entity.cpp:
 # Not a target:
 src/Game/Game.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 19:18:17.25546332
+#  Last modified 2022-08-22 21:53:17.250495219
 #  File has been updated.
 #  Successfully updated.
 
@@ -345,43 +344,23 @@ src/Game/Bullets.cpp:
 
 bin/main: src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/Score.cpp src/Game/main.cpp
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: ''
-#  Last modified 2022-08-22 19:17:32.183941411
+#  Last modified 2022-08-22 22:33:55.994711892
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := bin/main
-# automatic
-# * := 
-# automatic
-# < := src/Game/Animation.cpp
-# automatic
-# + := src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/Score.cpp src/Game/main.cpp
-# automatic
-# % := 
-# automatic
-# ^ := src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/Score.cpp src/Game/main.cpp
-# automatic
-# ? := src/Game/Game.cpp
-# automatic
- 
-# | := 
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=6/18=33%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 21):
 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
 
 # Not a target:
 src/Game/Maps.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 04:14:28.751490331
+#  Last modified 2022-08-22 21:50:51.553998893
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/Game/Score.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 19:16:00.109534925
+#  Last modified 2022-08-22 22:33:44.014884193
 #  File has been updated.
 #  Successfully updated.
 
@@ -396,9 +375,7 @@ all: bin/main
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/8=0%
+#  Successfully updated.
 
 # Not a target:
 src/Game/Enemy.cpp:
@@ -425,7 +402,7 @@ src/Game/Bullet.cpp:
 # Not a target:
 src/Game/Player.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-22 04:14:28.751490331
+#  Last modified 2022-08-22 22:20:11.618589742
 #  File has been updated.
 #  Successfully updated.
 
@@ -443,26 +420,20 @@ src/Game/Collision.cpp:
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 # files hash-table stats:
-# Load=21/1024=2%, Rehash=0, Collisions=0/52=0%
+# Load=21/1024=2%, Rehash=0, Collisions=0/51=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 46 / storage = 593 B / avg = 12 B
-# current buf: size = 8162 B / used = 593 B / count = 46 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 48 / storage = 610 B / avg = 12 B
+# current buf: size = 8162 B / used = 610 B / count = 48 / avg = 12 B
 
-# strcache performance: lookups = 61 / hit rate = 24%
+# strcache performance: lookups = 62 / hit rate = 22%
 # hash-table stats:
-# Load=46/8192=1%, Rehash=0, Collisions=1/61=2%
-# Finished Make data base on Mon Aug 22 19:19:10 2022
+# Load=48/8192=1%, Rehash=0, Collisions=1/62=2%
+# Finished Make data base on Mon Aug 22 22:35:49 2022
 
  

@@ -60,5 +60,5 @@ public:
     const sf::FloatRect getBounds() const;
     void logEntity();
     //monedaa
-    void moveCoin();
+    void moveHeart();
 };

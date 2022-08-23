@@ -20,7 +20,6 @@ void Score::finalScore(){
         selection();
         saveScore();
         guardado=true;
-        
     }    
 }
 TpList Score::initNodo(int num){
@@ -75,7 +74,7 @@ void Score::selection(){
 
 			while (siguiente != NULL) {
 
-				if (siguiente->nro < minimo) {
+				if (siguiente->nro > minimo) {
 					minimo = siguiente->nro;
 					min = siguiente;
 				}

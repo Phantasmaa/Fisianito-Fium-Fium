@@ -9,7 +9,7 @@ Maps::Maps()
     initVariables();
     createPlatforms();
     createObjects();
-    createCoins();
+    createHeart();
 }
 
 void Maps::initVariables()
@@ -134,34 +134,34 @@ void Maps::renderObjects(sf::RenderTarget *target)
         head = head->next_node;
     }
 }
-void Maps::createCoins()
+void Maps::createHeart()
 {
-    coins = new EntityNode();
-    EntityNode* head = coins;
+    heart = new EntityNode();
+    EntityNode* head = heart;
 
 
-    Entity coin1, coin2, coin3;
+    Entity heart1, heart2, heart3;
 
-    coin1.initAttributes(200, 20, 15, 15);
-    coin1.initShape();
-    coin2.initAttributes(300, 300, 15, 15);
-    coin2.initShape();
-    coin3.initAttributes(600, 60, 15, 15);
-    coin3.initShape();
+    heart1.initAttributes(200, 20, 15, 15);
+    heart1.initShape();
+    heart2.initAttributes(300, 300, 15, 15);
+    heart2.initShape();
+    heart3.initAttributes(600, 60, 15, 15);
+    heart3.initShape();
 
-    head->value = coin1;
+    head->value = heart1;
     head->next_node = new EntityNode();
     head = head->next_node;
-    head->value = coin2;
+    head->value = heart2;
     head->next_node = new EntityNode();
     head = head->next_node;
-    head->value = coin3;
+    head->value = heart3;
     head->next_node = new EntityNode();
     head = head->next_node;
 }
-void Maps::initCoins()
+void Maps::initHeart()
 {
-    EntityNode* head = coins;
+    EntityNode* head = heart;
     while (head)
     {
         head->value.initShape();
@@ -169,9 +169,9 @@ void Maps::initCoins()
     }
 }
 
-void Maps::renderCoins(sf::RenderTarget* target)
+void Maps::renderHeart(sf::RenderTarget* target)
 {
-    EntityNode* head = coins;
+    EntityNode* head = heart;
     while (head)
     {
         head->value.renderOnGame(target);

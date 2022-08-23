@@ -62,7 +62,7 @@ void Entity::moveEntity(float x_movement, float y_movement)
     updateCords();
 }
 //mover moneda
-void Entity::moveCoin() {
+void Entity::moveHeart() {
     shape.move(5000, 3);
 }
 void Entity::renderOnGame(sf::RenderTarget *target)

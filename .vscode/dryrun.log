@@ -1,4 +1,4 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/manuel/Escritorio/PROYECTO/Fisianito-Fium-Fium'
 g++ -Wall -Wextra -std=c++17 -ggdb -Iinclude -Llib src/Game/Animation.cpp src/Game/Bullet.cpp src/Game/Bullets.cpp src/Game/Collision.cpp src/Game/Enemy.cpp src/Game/EnemyManager.cpp src/Game/Entity.cpp src/Game/Game.cpp src/Game/GameTextures.cpp src/Game/Maps.cpp src/Game/Platform.cpp src/Game/Player.cpp src/Game/Score.cpp src/Game/main.cpp -o bin/main -lsfml-graphics -lsfml-window -lsfml-system
 make: Leaving directory '/home/manuel/Escritorio/PROYECTO/Fisianito-Fium-Fium'

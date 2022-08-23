@@ -29,14 +29,14 @@ private:
     // Objects
     void createObjects();
     //coins
-    void createCoins();
+    void createHeart();
     //teleports
     void createTeleport();
 public:
     // Platform attributes & functions
     EntityNode *platforms;
     EntityNode *objects;
-    EntityNode* coins;
+    EntityNode* heart;
     GameTextures texture;
     sf::Texture background;
     sf::Sprite sp_background;
@@ -47,8 +47,8 @@ public:
     void initPlatforms();
     void renderPlatforms(sf::RenderTarget *target);
     //coins
-    void initCoins();
-    void renderCoins(sf::RenderTarget* target);
+    void initHeart();
+    void renderHeart(sf::RenderTarget* target);
 
  
 };
