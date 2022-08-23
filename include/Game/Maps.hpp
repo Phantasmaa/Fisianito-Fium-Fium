@@ -37,7 +37,6 @@ public:
     EntityNode *platforms;
     EntityNode *objects;
     EntityNode* coins;
-    EntityNode* teleport;
     GameTextures texture;
     sf::Texture background;
     sf::Sprite sp_background;
@@ -47,8 +46,9 @@ public:
     void renderObjects(sf::RenderTarget *target);
     void initPlatforms();
     void renderPlatforms(sf::RenderTarget *target);
+    //coins
     void initCoins();
     void renderCoins(sf::RenderTarget* target);
-    void initTeleport();
-    void renderTeleport(sf::RenderTarget* target);
+
+ 
 };

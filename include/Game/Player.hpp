@@ -98,8 +98,9 @@ public:
     void windowsCollision();
     void checkCollisionWithObjects(EntityNode *objects);
     void changeColorWhenCollideWithEnemy();
+    void checkCollisionWithTeleport(EntityNode* coins);
     void checkCollisionWithCoins(EntityNode* coins,Score* points);
-    void checkCollisionWithTeleport(EntityNode* teleport);
+
     // other functions
     sf::Vector2f getPosition() { return shape.getPosition(); }
 };

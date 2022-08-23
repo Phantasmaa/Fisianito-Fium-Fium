@@ -332,6 +332,7 @@ void Player::checkCollisionWithCoins(EntityNode* coins,Score* points)
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
             head->value.moveCoin();
+          
             //points->mostrarScore();
             std::cout << "COge monedita fiummmm" << std::endl;
             points->coinScore();
@@ -344,19 +345,18 @@ void Player::checkCollisionWithCoins(EntityNode* coins,Score* points)
 }
 void Player::checkCollisionWithTeleport(EntityNode* teleport)
 {
-    
-    EntityNode *head = teleport;
+    EntityNode* head = teleport;
     while (head)
     {
         if (shape.getGlobalBounds().intersects(head->value.getShape().getGlobalBounds()))
         {
-            shape.setFillColor(sf::Color::Red);
-            std::cout << "se teleporta" << std::endl;
-            live -= 1;
+            shape.move(3000,0);
+            //points->mostrarScore();
+            std::cout << "Se teletransporta" << std::endl;
             return;
         }
         // shape.setFillColor(sf::Color::Green);
-        shape.setFillColor(sf::Color::White);
+       // shape.setFillColor(sf::Color::White);
         head = head->next_node;
     }
-    }
+}

@@ -36,7 +36,6 @@ void Game::initEntitys()
     map.initObjects();
     map.initBackground();
     map.initCoins();
-    //map.initTeleport();
     this->ground.initAttributes(0, 670, 1280.0f, 100.0f);
     this->ground.initShape();
 }
@@ -88,7 +87,6 @@ void Game::update(float dt)
         //Collision with enemies
         enemy.checkCollisionWithPlayer(player);
         player.changeColorWhenCollideWithEnemy();
-        //player.checkCollisionWithTeleport(map.teleport);
         player.checkCollisionWithCoins(map.coins,&points);
         
     }
@@ -115,15 +113,14 @@ void Game::render()
     map.renderPlatforms(this->window);
     map.renderObjects(this->window);
     map.renderCoins(this->window);//monedas
-    //map.renderTeleport(this->window);
     if (player.isAlive)
     {
         player.renderOnGame(this->window);
         bulletList.renderBullets(this->window);
     }
-    // enemy.renderOnGame(this->window);
+    //enemy.renderOnGame(this->window);
     enemy.renderEnemies(this->window);
 
     // renderPlatforms();
-    window->display();
+    window->display(); 
 }
