@@ -27,6 +27,7 @@ TpList Score::initNodo(int num){
 	nuevo = new(struct nodo);
 	nuevo->nro = num;
 	nuevo->sgte = NULL;
+    std::cout<<"guardado"<<std::endl;
 	return nuevo;
 }
 void Score::insertScore(int num){
@@ -37,39 +38,26 @@ void Score::insertScore(int num){
 }
 void Score::readScore(){    
     std::string line;
-	//std::ifstream text;
     std::ifstream text("records.txt");
-	//text.open("records.txt", std::ios::in);
-
-    int sum=0;
-	bscores[cont] = score;
-    cont++;
-
+    int num;
+    insertScore(score);
 	if (text.fail()) {
 		return;
 	}
-
 	while (!text.eof()){
 		std::getline(text, line);
-		bscores[cont] = std::stoi(line);
-		cont++;
+        std::from_chars(line.c_str(),line.c_str()+line.length(),num);
+        insertScore(num);
 	}
 	text.close();
 }
+
 void Score::saveScore(){
     std::ofstream text;
-
 	text.open("records.txt", std::ios::out);
-
-	/*while (record != NULL) {
-		text << record->nro<<std::endl;
-		record = record->sgte;
-	}*/
-    for(int i=0; i<cont;i++){
-        std::cout<<bscores[i]<<std::endl;
-        text<<bscores[i]<<std::endl;
-    }
+	while (points != NULL) {
+		text << points->nro<<std::endl;
+		points = points->sgte;
+	}
 	text.close();
-
-
 }

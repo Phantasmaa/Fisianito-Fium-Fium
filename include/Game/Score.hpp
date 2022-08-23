@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 #include<iostream>
+#include<charconv>
 
 struct nodo {
 	int nro;
