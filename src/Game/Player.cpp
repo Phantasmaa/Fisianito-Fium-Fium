@@ -334,7 +334,7 @@ void Player::checkCollisionWithCoins(EntityNode* coins,Score* points)
             head->value.moveCoin();
             //points->mostrarScore();
             std::cout << "COge monedita fiummmm" << std::endl;
-            points->mostrarScore();
+            points->coinScore();
             return;
         }
         // shape.setFillColor(sf::Color::Green);

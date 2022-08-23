@@ -6,6 +6,7 @@
 #include "Maps.hpp"
 #include <vector>
 #include "Player.hpp"
+#include "Score.hpp"
 
 class EnemyManager
 {
@@ -30,6 +31,6 @@ public:
     void checkCollisionWithPlayer(Player &player);
     void initEnemies();
     void updateManager(BulletNode *bullets);
-    void removeDeadEnemies();
+    void removeDeadEnemies(Score *points);
     void renderEnemies(sf::RenderTarget *target);
 };

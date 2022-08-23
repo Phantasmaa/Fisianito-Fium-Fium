@@ -92,6 +92,9 @@ void Game::update(float dt)
         player.checkCollisionWithCoins(map.coins,&points);
         
     }
+    else{
+        points.finalScore();
+    }
     pollEvents();
     // enemy.checkImpactWithBullets(bulletList.bulletsList);
     //  enemy.checkCollisionWithPlatforms(map.platforms);
@@ -100,7 +103,7 @@ void Game::update(float dt)
     
     enemy.initEnemies();
     enemy.updateManager(bulletList.bulletsList);
-    enemy.removeDeadEnemies();
+    enemy.removeDeadEnemies(&points);
 }
 
 void Game::render()

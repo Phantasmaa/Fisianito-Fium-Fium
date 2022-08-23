@@ -52,7 +52,7 @@ void EnemyManager::renderEnemies(sf::RenderTarget *target)
     }
 }
 
-void EnemyManager::removeDeadEnemies()
+void EnemyManager::removeDeadEnemies(Score *points)
 {
     std::vector<int> indexToRemove;
     for (int i = 0; i < enemies.size(); i++)
@@ -67,6 +67,7 @@ void EnemyManager::removeDeadEnemies()
     {
         std::cout << "Borrando enemigo" << std::endl;
         enemies.erase(enemies.begin() + index);
+        points->enemyScore();
     }
 }
 
