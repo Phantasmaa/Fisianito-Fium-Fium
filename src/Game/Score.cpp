@@ -37,10 +37,11 @@ void Score::insertScore(int num){
 }
 void Score::readScore(){    
     std::string line;
-	std::ifstream text;
+	//std::ifstream text;
+    std::ifstream text("records.txt");
+	//text.open("records.txt", std::ios::in);
 
-	text.open("records.txt", std::ios::in);
-
+    int sum=0;
 	bscores[cont] = score;
     cont++;
 
@@ -48,9 +49,9 @@ void Score::readScore(){
 		return;
 	}
 
-	while (text.eof()){
+	while (!text.eof()){
 		std::getline(text, line);
-		bscores[cont] = stoi(line);
+		bscores[cont] = std::stoi(line);
 		cont++;
 	}
 	text.close();

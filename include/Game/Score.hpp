@@ -2,6 +2,7 @@
 #include<iostream>
 #include <sstream>
 #include <fstream>
+#include<iostream>
 
 struct nodo {
 	int nro;
