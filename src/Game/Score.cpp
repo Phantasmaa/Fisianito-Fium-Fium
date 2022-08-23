@@ -17,6 +17,7 @@ void Score::finalScore(){
     if(guardado==false){
         std::cout<<"Puntaje final: "<<score<<std::endl;
         readScore();
+        selection();
         saveScore();
         guardado=true;
         
@@ -27,7 +28,6 @@ TpList Score::initNodo(int num){
 	nuevo = new(struct nodo);
 	nuevo->nro = num;
 	nuevo->sgte = NULL;
-    std::cout<<"guardado"<<std::endl;
 	return nuevo;
 }
 void Score::insertScore(int num){
@@ -46,6 +46,8 @@ void Score::readScore(){
 	}
 	while (!text.eof()){
 		std::getline(text, line);
+        if(line=="")
+            break;
         std::from_chars(line.c_str(),line.c_str()+line.length(),num);
         insertScore(num);
 	}
@@ -60,4 +62,31 @@ void Score::saveScore(){
 		points = points->sgte;
 	}
 	text.close();
+}
+void Score::selection(){
+    	TpList actual, siguiente;   int t;
+		actual = points; int minimo;
+		TpList min = points;
+
+		while (actual->sgte != NULL) {
+			minimo = actual->nro;
+			min = actual;
+			siguiente = actual->sgte;
+
+			while (siguiente != NULL) {
+
+				if (siguiente->nro < minimo) {
+					minimo = siguiente->nro;
+					min = siguiente;
+				}
+
+				siguiente = siguiente->sgte;
+			}
+
+			t = actual->nro;
+			actual->nro = min->nro;
+			min->nro = t;
+
+			actual = actual->sgte;
+		}
 }

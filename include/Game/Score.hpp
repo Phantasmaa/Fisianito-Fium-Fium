@@ -30,5 +30,5 @@ public:
 	void insertScore(int num);//insertar el puntaje en la lista
 	void readScore();//lee scores anterioresS
 	void saveScore();//guarda los puntajes
-
+	void selection();//orderamiento por selección
 };
